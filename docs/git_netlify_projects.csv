@@ -1,20 +1,20 @@
 Repo Name,Visibility,Repo Type,Language,Description,Netlify Site,Netlify URL,Deploy Source,Last Published
-Workout-Timer,Public,Original,JavaScript,Workout Timer,workouttimerpro,workouttimerpro.netlify.app,GitHub,21/06/2026
+Workout-Timer,Public,Original,JavaScript,Workout Timer,workouttimerpro,https://workouttimerpro.netlify.app,GitHub,21/06/2026
 home,Private,Original,TypeScript,,new-home-owner.online,https://new-home-owner.online,GitHub,19/06/2026
-aiemd_platform,Private,Original,TypeScript,,aiemdplatform,aiemdplatform.netlify.app,GitHub (Angular),13/06/2026
-ChatHop,Private,Original,HTML,Direct to whatsapp,chathop,chathop.netlify.app,GitHub,09/06/2026
-math-practice,Public,Original,TypeScript,advanced math practice for 6 graders,adv-math-practice,adv-math-practice.netlify.app,GitHub,18/05/2026
-az-ma-kore,Private,Original,JavaScript,alarms in dimona,az-ma-kore,az-ma-kore.netlify.app,GitHub,06/04/2026
-lumi-kid,Private,Original,TypeScript,personal teacher,lumi-kid,lumi-kid.netlify.app,GitHub,16/03/2026
-past-palette,Public,Original,TypeScript,past-palette,past-palette,past-palette.netlify.app,GitHub,07/02/2026
-save-the-past,Public,Original,TypeScript,save-the-past,save-the-past,save-the-past.netlify.app,GitHub,04/02/2026
-stem-explorers,Public,Original,TypeScript,stem-explorers,stem-explorers,stem-explorers.netlify.app,GitHub (Next.js),22/01/2026
-ArcheoTriage,Public,Original,TypeScript,ArcheoTriage,archeotriage,archeotriage.netlify.app,GitHub,12/01/2026
-KeyQuest,Public,Original,TypeScript,"a fun, game-driven way to learn touch typing from the ground up",keyquest-app,keyquest-app.netlify.app,GitHub (Next.js),09/01/2026
+aiemd_platform,Private,Original,TypeScript,,aiemdplatform,https://aiemdplatform.netlify.app,GitHub (Angular),13/06/2026
+ChatHop,Private,Original,HTML,Direct to whatsapp,chathop,https://chathop.netlify.app,GitHub,09/06/2026
+math-practice,Public,Original,TypeScript,advanced math practice for 6 graders,adv-math-practice,https://adv-math-practice.netlify.app,GitHub,18/05/2026
+az-ma-kore,Private,Original,JavaScript,alarms in dimona,az-ma-kore,https://az-ma-kore.netlify.app,GitHub,06/04/2026
+lumi-kid,Private,Original,TypeScript,personal teacher,lumi-kid,https://lumi-kid.netlify.app,GitHub,16/03/2026
+past-palette,Public,Original,TypeScript,past-palette,past-palette,https://past-palette.netlify.app,GitHub,07/02/2026
+save-the-past,Public,Original,TypeScript,save-the-past,save-the-past,https://save-the-past.netlify.app,GitHub,04/02/2026
+stem-explorers,Public,Original,TypeScript,stem-explorers,stem-explorers,https://stem-explorers.netlify.app,GitHub (Next.js),22/01/2026
+ArcheoTriage,Public,Original,TypeScript,ArcheoTriage,archeotriage,https://archeotriage.netlify.app,GitHub,12/01/2026
+KeyQuest,Public,Original,TypeScript,"a fun, game-driven way to learn touch typing from the ground up",keyquest-app,https://keyquest-app.netlify.app,GitHub (Next.js),09/01/2026
 floatjet,Public,Original,Astro,floatjet,floatjet.com,https://floatjet.com,GitHub (Astro),21/12/2025
-mcp-image-server,Public,Original,JavaScript,,image-generator-mcp,image-generator-mcp.netlify.app,GitHub,20/12/2025
-hotjar-extensions,Public,Original,JavaScript,,hotjarblocker,hotjarblocker.netlify.app,GitHub,09/11/2025
+mcp-image-server,Public,Original,JavaScript,,image-generator-mcp,https://image-generator-mcp.netlify.app,GitHub,20/12/2025
+hotjar-extensions,Public,Original,JavaScript,,hotjarblocker,https://hotjarblocker.netlify.app,GitHub,09/11/2025
 ScalpelPDF,Public,Fork,C#,PDF editor for Windows. Install or run portable. GPLv3.,,,,
 search-mcp,Public,Original,TypeScript,Local-first MCP server providing semantic code search,,,,
-(no matching repo),—,—,—,Deployed from Bolt,gregarious-kashata-cbfd50,gregarious-kashata-cbfd50.netlify.app,Bolt (no Git),08/07/2025
-(no matching repo),—,—,—,Deployed via Netlify Drop,desert-tech-begin,desert-tech-begin.netlify.app,Netlify Drop (no Git),11/05/2025
+(no matching repo),—,—,—,Deployed from Bolt,gregarious-kashata-cbfd50,https://gregarious-kashata-cbfd50.netlify.app,Bolt (no Git),08/07/2025
+(no matching repo),—,—,—,Deployed via Netlify Drop,desert-tech-begin,https://desert-tech-begin.netlify.app,Netlify Drop (no Git),11/05/2025
