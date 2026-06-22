@@ -9,8 +9,10 @@
   border-bottom: 1px solid var(--line);
 }
 
-/* replicate .filterbar .wrap padding via a local bar class applied alongside global wrap */
-.bar {
+/* replicate .filterbar .wrap padding via a local bar class applied alongside global wrap.
+   Use the descendant form so specificity (0,2,0) reliably beats the global .wrap (0,1,0)
+   regardless of stylesheet load order — matches showcase.html's `.filterbar .wrap`. */
+.filterbar .bar {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
