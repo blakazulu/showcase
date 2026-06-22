@@ -42,10 +42,18 @@ export default function CadenceChart() {
   const reduce = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function jumpTo(slug: string) {
-    const el = document.getElementById(slug);
-    if (!el) return;
-    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-    el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+    // Ask the (separate) filter island to reset to "All" so the target card is rendered.
+    window.dispatchEvent(new CustomEvent("showcase:reset-filter"));
+    // Scroll after React has had a chance to commit the filter reset + re-render.
+    const run = () => {
+      const el = document.getElementById(slug);
+      if (!el) return;
+      el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+      el.classList.remove("flash");
+      void el.offsetWidth;
+      el.classList.add("flash");
+    };
+    requestAnimationFrame(() => requestAnimationFrame(run));
   }
 
   return (
@@ -73,7 +81,7 @@ export default function CadenceChart() {
                     transitionDelay: `${120 + d.i * 55}ms`,
                   }),
                 }}
-                aria-label={`${d.name}, ${fmtDate(d.date)}. View card.`}
+                aria-label={`${d.name}, ${fmtDate(d.date)}, ${LANE_ORDER[d.lane]}. View project.`}
                 onMouseEnter={() => setTip({ x: `${d.x}%`, y: d.lane * LANE + LANE / 2, text: `${d.name} · ${fmtDate(d.date)}` })}
                 onFocus={() => setTip({ x: `${d.x}%`, y: d.lane * LANE + LANE / 2, text: `${d.name} · ${fmtDate(d.date)}` })}
                 onMouseLeave={() => setTip(null)} onBlur={() => setTip(null)}
