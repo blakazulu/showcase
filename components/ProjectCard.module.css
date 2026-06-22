@@ -51,7 +51,8 @@
   border:1px solid color-mix(in srgb,var(--cat,var(--accent)) 28%,transparent)}
 .featured .ic{width:40px;height:40px;border-radius:11px}
 .tagline{color:var(--cat,var(--accent));font-weight:600;font-size:.9rem}
-.desc{color:var(--ink-2);font-size:.95rem;line-height:1.6;margin-top:4px}
+.short{color:var(--ink-2);font-size:.9rem;line-height:1.55;margin-top:4px}
+.desc{color:var(--ink-3);font-size:.92rem;line-height:1.6;margin-top:6px}
 
 .stack{display:flex;flex-wrap:wrap;gap:5px}
 .stack span{

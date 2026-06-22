@@ -58,6 +58,7 @@ export default function ProjectCard({
           </Link>
         </h3>
         <p className={s.tagline}>{p.tagline}</p>
+        {p.short && <p className={s.short}>{p.short}</p>}
         {featured && <p className={s.desc}>{p.desc}</p>}
       </div>
 

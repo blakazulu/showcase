@@ -4,7 +4,8 @@ export type Category = "Web App" | "AI" | "Dev Tool" | "Education" | "Extension"
 export interface Project {
   name: string;
   slug: string;
-  tagline: string;
+  tagline: string;            // hook — punchy one-liner
+  short?: string;             // one-sentence marketing description (shown on cards)
   date: string | null;        // ISO YYYY-MM-DD or null
   cats: Category[];
   vis: Visibility;
