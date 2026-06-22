@@ -1,5 +1,10 @@
 import type { Project } from "./types";
 
+// `slug` is hand-authored per entry (it is the canonical URL segment used for
+// routing and the cadence-chart scroll target) — it is NOT derived from `name`.
+// Some slugs intentionally differ from a naive kebab-case of the name
+// (e.g. "MortgageFix (משכנתFix)" → "mortgagefix"). The `slug()` helper exists
+// only to validate URL-safety/uniqueness in tests, not to generate these.
 export const PROJECTS: Project[] = [
   { name: "CYCLE", slug: "cycle", tagline: "Cyberpunk HIIT workout timer & music PWA", date: "2026-06-21",
     cats: ["Web App"], vis: "Public", icon: "⏱️",
