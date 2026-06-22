@@ -150,23 +150,7 @@
   color: var(--ink);
 }
 
-.primary {
-  background: var(--accent) !important;
-  border-color: var(--accent) !important;
-  color: #fff !important;
-}
-
-.primary:hover {
-  background: var(--accent-deep) !important;
-  border-color: var(--accent-deep) !important;
-}
-
-.npm {
-  color: var(--c-dev) !important;
-  border-color: color-mix(in srgb, var(--c-dev) 40%, var(--line)) !important;
-}
-
-.npm:hover {
-  border-color: var(--c-dev) !important;
-  color: var(--c-dev) !important;
-}
+.links a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.links a.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+.links a.npm { color: var(--c-dev); border-color: color-mix(in srgb, var(--c-dev) 40%, var(--line)); }
+.links a.npm:hover { border-color: var(--c-dev); color: var(--c-dev); }
