@@ -10,8 +10,11 @@ Next.js 15 App Router portfolio — Liraz Amir's 19 shipped projects as a filter
 
 - `npm run dev` — local dev server (hot reload)
 - `npm run build` — static export to `out/` (runs `next build`)
-- `npm test` — Vitest unit tests (`components/__tests__/`)
+- `npm test` — Vitest unit tests (`lib/__tests__/` helpers/data + `components/__tests__/` ProjectCard/HomeFilter)
 - `npm run test:e2e` — Playwright responsive matrix (runs `next build` first; tests home + detail pages across 6 viewports)
+- `npm run lint` — Next.js lint
+
+Configs: `next.config.mjs` (`output: 'export'`, `images.unoptimized`), `vitest.config.ts` (jsdom; excludes `e2e/`), `playwright.config.ts` (6-viewport matrix, serves `out/`), `netlify.toml` (build + publish `out/`).
 
 ## Architecture
 
