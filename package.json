@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "pretest:e2e": "next build",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "next": "^15.1.0",
@@ -15,14 +17,16 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^16.1.0",
+    "@playwright/test": "^1.61.0",
     "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
     "@types/node": "^20.17.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^25.0.1",
+    "serve": "^14.2.6",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.8",
-    "@vitejs/plugin-react": "^4.3.4"
+    "vitest": "^2.1.8"
   }
 }
