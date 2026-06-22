@@ -1,0 +1,58 @@
+.hero{
+  position:relative;
+  padding:clamp(110px,16vh,180px) 0 clamp(40px,6vh,70px);
+}
+
+.copy{position:relative;z-index:1}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-2);padding:6px 13px;border:1px solid var(--line-2);border-radius:999px;
+  background:rgba(8,10,18,.5);backdrop-filter:blur(6px);
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pulse 2.4s infinite}
+
+.title{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(3rem,9vw,6.6rem);line-height:.97;letter-spacing:-.04em;
+  margin:24px 0 0;
+  text-shadow:0 2px 40px rgba(5,6,11,.55);
+}
+.grad{
+  background:linear-gradient(100deg,#ffd66b,#ffb454);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{
+  margin-top:22px;max-width:56ch;
+  font-size:clamp(1rem,1.6vw,1.22rem);color:var(--ink-2);line-height:1.65;
+  text-shadow:0 1px 20px rgba(5,6,11,.7);
+}
+
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.primary,.ghost{
+  font-family:var(--display);font-weight:700;font-size:1rem;
+  padding:14px 24px;border-radius:var(--r);cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;border:1px solid transparent;
+  transition:transform .18s ease, box-shadow .25s ease, background .2s ease, border-color .2s ease;
+}
+.primary{color:#fff;background:var(--accent);box-shadow:0 10px 30px -8px var(--accent), inset 0 1px 0 rgba(255,255,255,.18)}
+.primary:hover{background:var(--accent-deep);box-shadow:0 14px 38px -8px var(--accent)}
+.ghost{color:var(--ink);border-color:var(--line-2);background:rgba(12,15,25,.55);backdrop-filter:blur(6px)}
+.ghost:hover{border-color:var(--accent);color:#fff}
+.primary:active,.ghost:active{transform:translateY(1px)}
+
+.prompt{
+  margin-top:40px;font-family:var(--mono);font-size:14px;color:var(--ink-2);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.pr{color:var(--live)}
+.fl{color:var(--accent-glow)}
+.cursor{display:inline-block;width:9px;height:17px;background:var(--accent);vertical-align:-3px;animation:blink 1s steps(2) infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+@media (prefers-reduced-motion: reduce){
+  .blob{animation:none}
+  .dot{animation:none}
+  .cursor{animation:none}
+}

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Next.js 15 App Router portfolio — Liraz Amir's 19 shipped projects as a filterable, static-exported site deployed to Netlify (`sbz-showcase.netlify.app`) on every push to `main`. Stack: React 19, TypeScript strict, CSS Modules + design tokens, static export (`output: 'export'`). Read `docs/GOALS.md` first; it holds the mission, scope, and honesty constraints. `docs/git_netlify_projects.csv` is the raw project inventory.
+Next.js 15 App Router portfolio — Liraz Amir's 18 shipped projects as a filterable, static-exported site deployed to Netlify (`sbz-showcase.netlify.app`) on every push to `main`. The design is **"Aurora hero → console-styled bento"**: a bold gradient hero ("I ship real products.") over a flowing aurora (CSS gradient base + an optional Three.js shader accent), bridging into a terminal-window "deploy log" — KPI chips, a prompt line that reflects the active filter, category chips, and a bento grid of mono-styled project tiles. Stack: React 19, TypeScript strict, Three.js + `@react-three/fiber` + `@react-three/drei` (shader accent only — *not* the centerpiece), CSS Modules + design tokens, static export (`output: 'export'`). Theme is dark. Read `docs/GOALS.md` first; it holds the mission, scope, and honesty constraints. `docs/git_netlify_projects.csv` is the raw project inventory.
 
 ## Commands
 
@@ -21,36 +21,34 @@ Configs: `next.config.mjs` (`output: 'export'`, `images.unoptimized`), `vitest.c
 ### `lib/` — single source of truth
 
 - `types.ts` — `Project`, `Visibility`, `Category` types
-- `projects.ts` — the 19 projects array (the only place project data lives)
-- `helpers.ts` — `COLORS`, `LANE_ORDER`, `PRIORITY`, `primaryCat`, `fmtDate`, `slug`, `sortByDateDesc`, `getStats`
+- `projects.ts` — the 18 projects array (the only place project data lives)
+- `helpers.ts` — `COLORS`, `LANE_ORDER`, `PRIORITY`, `primaryCat`, `fmtDate`, `slug`, `sortByDateDesc`, `getStats`. `COLORS` are brightened to glow on the dark surface and are the single source of category color (tile `--cat` accent, chips).
 
 ### Components (`components/`)
 
-Each component has a co-located CSS Module. Two client islands, everything else is a Server Component:
+Each component has a co-located CSS Module. Client islands are `AuroraHero`, `AuroraShader`, `HomeFilter`; everything else (`ProjectCard`, `ProjectGrid`, `ProjectDetail`, `Footer`) is a Server Component:
 
-- **`CadenceChart`** (`"use client"`) — deploy-cadence chart; dots are absolutely-positioned `<button>` elements in a `<div>` plot (not SVG), plotted from `date` fields; undated projects excluded + footnoted. Clicking a dot dispatches `window.dispatchEvent(new Event("showcase:reset-filter"))` then scrolls to the card and flashes it (`article.flash`).
-- **`HomeFilter`** (`"use client"`) — category filter chips + project grid. Listens for `showcase:reset-filter` to reset to "All".
+- **`AuroraHero`** (`"use client"`) — the hero: bold gradient headline + CTAs + a console prompt line bridging into the log. Background is a CSS aurora (animated gradient blobs, always present) with `AuroraShader` layered over it via `mix-blend:screen`. Detects `prefers-reduced-motion` / low-power and only mounts the shader when capable.
+- **`AuroraShader`** (`"use client"`) — a single full-screen R3F `<ScreenQuad>` fragment shader (flowing fbm aurora, one draw call). Dynamic-imported with `ssr:false` so static export stays intact. Purely a visual accent; the site is fully usable without it.
+- **`HomeFilter`** (`"use client"`) — the "deploy log" console: a terminal window (traffic-light chrome + sticky header with live KPI chips), a prompt line that updates with the active filter (`--all` / `--cat=…`), an output count line, category filter chips (`<button>` per category), and `ProjectGrid`.
+- **`ProjectCard`** — a console-styled bento tile: mono status row (dot + label) + category badge, big project name linking to `/projects/[slug]`, tagline, tech chips, and a foot with the date + mono `live`/`github`/`npm` links. `featured` tiles span 2 columns and show the full description; `ProjectGrid` marks the first (newest) tile featured.
+- **`ProjectGrid`** — responsive bento grid (`auto-fill` + `grid-auto-flow:dense`), `data-testid="project-grid"`, one `<article>` per project.
 
 ### Pages
 
-- `app/page.tsx` — Home: `Hero` wraps `CadenceChart` + `StatStrip` as children for single-`.wrap` alignment; `HomeFilter` below.
+- `app/page.tsx` — Home: `AuroraHero` → `HomeFilter` (the console log) → `Footer`.
 - `app/projects/[slug]/page.tsx` — per-project detail pages via `generateStaticParams` (one per project slug) + `generateMetadata`.
-
-### Cross-island event contract
-
-CadenceChart dot click → `showcase:reset-filter` window event → HomeFilter resets to "All" → chart scrolls to card (which carries the global `flash` class from `app/globals.css`).
 
 ### Derived rendering (never hardcode computed values)
 
-- Stats strip (shipped/live/on-npm/AI/domains) computed at runtime from `PROJECTS` via `getStats`.
-- Cadence dots placed from `date` fields; `date: null` projects are excluded from the timeline and listed in the chart footnote.
-- Category bucketing via `PRIORITY` / `primaryCat`; spine color driven by `COLORS[primaryCat(p)]`.
-- Card grid: `sortByDateDesc` (nulls last), filtered by active chip.
+- KPI chips (shipped/live/AI/npm) and the output count line are computed at runtime from `PROJECTS` via `getStats` / the filtered list.
+- Category bucketing via `PRIORITY` / `primaryCat`; tile accent + glow driven by `COLORS[primaryCat(p)]` (the `--cat` CSS var).
+- Grid order: `sortByDateDesc` (nulls last), filtered by the active chip; first tile is featured.
 
 ### CSS conventions
 
 - `.flash` and `@keyframes flash` live in `app/globals.css` (global). All other animations live in component module files, gated under `@media (prefers-reduced-motion: no-preference)`.
-- Design tokens in `app/globals.css` `:root`: cool-putty palette, flat color only (no gradients/glow), cobalt accent, IBM Plex Mono for metadata/dates. Do not introduce ad-hoc colors outside the token block.
+- Design tokens in `app/globals.css` `:root`: dark palette (near-black surfaces, cobalt accent, brightened category glow colors), IBM Plex Mono for metadata/dates/console UI. `color-scheme: dark`. Do not introduce ad-hoc colors outside the token block. `html`/`body` use `overflow-x: clip` to keep the aurora and any wide tiles from triggering horizontal scroll (the Playwright overflow gate).
 - `style={{ "--cat": COLORS[cat] } as React.CSSProperties}` pattern for CSS custom properties in TSX (TypeScript safe cast).
 
 ## Responsive / safe-area rule

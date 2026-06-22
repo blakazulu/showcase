@@ -1,8 +1,10 @@
 import type { Project, Category } from "./types";
 
+// Brightened for the dark cosmic field — these drive 3D node glow, the --cat
+// CSS var on cards, and the filter chips. Single source of category color.
 export const COLORS: Record<Category, string> = {
-  "AI": "#6a3fe0", "Education": "#bf7a0e", "Web App": "#1f3fe0",
-  "Dev Tool": "#0e8c8c", "Extension": "#bf492e", "Content": "#51607a",
+  "AI": "#9d7bff", "Education": "#ffb454", "Web App": "#5b8cff",
+  "Dev Tool": "#2dd4cf", "Extension": "#ff7a59", "Content": "#8aa6d8",
 };
 export const LANE_ORDER: Category[] = ["AI", "Education", "Web App", "Dev Tool", "Extension", "Content"];
 export const PRIORITY: Category[] = ["Extension", "Dev Tool", "Content", "Education", "AI", "Web App"];

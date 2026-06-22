@@ -53,9 +53,9 @@ describe("getStats", () => {
 });
 
 describe("PROJECTS data", () => {
-  it("has 19 entries with unique slugs", () => {
-    expect(PROJECTS).toHaveLength(19);
-    expect(new Set(PROJECTS.map(p=>p.slug)).size).toBe(19);
+  it("has 18 entries with unique slugs", () => {
+    expect(PROJECTS).toHaveLength(18);
+    expect(new Set(PROJECTS.map(p=>p.slug)).size).toBe(18);
   });
   it("every slug is unique and URL-safe", () => {
     const seen = new Set<string>();

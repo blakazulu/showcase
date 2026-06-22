@@ -11,7 +11,7 @@ describe("ProjectCard", () => {
   it("renders name linking to detail page and a Live link", () => {
     render(<ProjectCard project={p} />);
     expect(screen.getByRole("link", { name: /CYCLE/ })).toHaveAttribute("href", "/projects/cycle");
-    expect(screen.getByRole("link", { name: /Live/ })).toHaveAttribute("href", "https://x");
+    expect(screen.getByRole("link", { name: /live/i })).toHaveAttribute("href", "https://x");
   });
   it("shows formatted date and status", () => {
     render(<ProjectCard project={p} />);

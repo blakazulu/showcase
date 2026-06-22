@@ -1,46 +1,38 @@
 import Link from "next/link";
 import s from "./ProjectDetail.module.css";
+import ProjectCard from "./ProjectCard";
+import ProjectIcon from "./ProjectIcon";
 import type { Project } from "@/lib/types";
-import { primaryCat, COLORS, fmtDate } from "@/lib/helpers";
+import { PROJECTS } from "@/lib/projects";
+import { primaryCat, COLORS, fmtDate, sortByDateDesc } from "@/lib/helpers";
+
+function statusLabel(p: Project): [string, string] {
+  if (p.vis === "Private") return ["private", "Private"];
+  if (p.vis === "Fork") return ["fork", "Fork"];
+  if (p.vis === "Standalone") return ["norepo", "No repo"];
+  return p.live ? ["live", "Live"] : ["public", "Public"];
+}
 
 export default function ProjectDetail({ project: p }: { project: Project }) {
   const cat = primaryCat(p);
-  const status =
-    p.vis === "Private"
-      ? "Private"
-      : p.vis === "Fork"
-      ? "Fork"
-      : p.vis === "Standalone"
-      ? "No repo"
-      : p.live
-      ? "Live"
-      : "Public";
-
-  const statusClass =
-    p.vis === "Private"
-      ? s.private
-      : p.vis === "Fork"
-      ? s.fork
-      : p.vis === "Standalone"
-      ? s.norepo
-      : p.live
-      ? s.live
-      : s.public;
+  const [sc, sl] = statusLabel(p);
+  const related = sortByDateDesc(
+    PROJECTS.filter((x) => x.slug !== p.slug && primaryCat(x) === cat)
+  ).slice(0, 3);
 
   return (
-    <article
-      className={s.detail}
-      style={{ "--cat": COLORS[cat] } as React.CSSProperties}
-    >
+    <article className={s.detail} style={{ "--cat": COLORS[cat] } as React.CSSProperties}>
+      <div className={s.glow} aria-hidden="true" />
+
       <div className="wrap">
         <Link href="/" className={s.back}>
-          ← All projects
+          <span className={s.pr}>$</span> cd ~/projects
         </Link>
 
         <div className={s.meta}>
-          <span className={`${s.status} ${statusClass}`}>
+          <span className={`${s.status} ${s[sc]}`}>
             <span className={s.d} />
-            {status}
+            {sl}
           </span>
           <span className={s.sep}>/</span>
           <span>{fmtDate(p.date)}</span>
@@ -48,8 +40,8 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
         </div>
 
         <h1 className={s.title}>
-          <span className={s.ic}>{p.icon}</span>
-          {p.name}
+          <span className={s.ic} aria-hidden="true"><ProjectIcon slug={p.slug} size={30} /></span>
+          <span className={s.grad}>{p.name}</span>
         </h1>
 
         <p className={s.tagline}>{p.tagline}</p>
@@ -63,33 +55,26 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
 
         <div className={s.links}>
           {p.live && (
-            <a
-              className={s.primary}
-              href={p.live}
-              target="_blank"
-              rel="noopener"
-            >
-              Live ↗
+            <a className={s.primary} href={p.live} target="_blank" rel="noopener">
+              visit live ↗
             </a>
           )}
           {p.github && (
             <a href={p.github} target="_blank" rel="noopener">
-              GitHub
+              github
             </a>
           )}
           {p.npm && (
-            <a
-              className={s.npm}
-              href={p.npm}
-              target="_blank"
-              rel="noopener"
-            >
+            <a className={s.npm} href={p.npm} target="_blank" rel="noopener">
               npm
             </a>
           )}
         </div>
 
-        <p className={s.shipped}>Shipped {fmtDate(p.date)}</p>
+        <p className={s.shipped}>
+          <span className={s.pr}>›</span> shipped {fmtDate(p.date)} ·{" "}
+          {p.vis === "Public" ? "open source" : sl.toLowerCase()}
+        </p>
 
         {p.highlights && p.highlights.length > 0 && (
           <section className={s.section}>
@@ -109,6 +94,17 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
               {p.screenshots.map((src) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img key={src} src={src} alt={`${p.name} screenshot`} loading="lazy" />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {related.length > 0 && (
+          <section className={s.related}>
+            <p className={s.kicker}>// related — more {cat.toLowerCase()}</p>
+            <div className={s.relgrid}>
+              {related.map((r) => (
+                <ProjectCard key={r.slug} project={r} />
               ))}
             </div>
           </section>

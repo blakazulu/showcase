@@ -18,12 +18,6 @@ export const PROJECTS: Project[] = [
     tech: ["TypeScript","Google Cloud","AI","Google Auth","RTL"],
     live: "https://new-home-owner.online" },
 
-  { name: "AIEMD Platform", slug: "aiemd-platform", tagline: "AI-enhanced medical decisions", date: "2026-06-13",
-    cats: ["AI","Web App"], vis: "Private", icon: "🏥",
-    desc: "AIEMD.ai — an Angular platform that brings AI into clinical decision-making to support healthcare professionals. Private build.",
-    tech: ["Angular","TypeScript","AI"],
-    live: "https://aiemdplatform.netlify.app" },
-
   { name: "ChatHop", slug: "chathop", tagline: "WhatsApp anyone without saving the number", date: "2026-06-09",
     cats: ["Web App"], vis: "Private", icon: "💬",
     desc: "A tiny utility that opens a WhatsApp chat with any phone number directly — no need to add the contact to your phone first. Type the number, hop straight into the conversation.",

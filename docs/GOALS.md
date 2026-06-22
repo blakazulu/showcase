@@ -24,10 +24,10 @@ An interactive, self-contained **showcase page** (`showcase.html`) that presents
 
 ## Scope
 
-**In scope (19 entries):**
+**In scope (18 entries):**
 
 - 12 public projects with full detail (CYCLE, Past Palette, Save The Past, ArcheoTriage, STEM Explorers, חשבונייה / Math Practice, KeyQuest, FloatJet, AI Image Generator, Search MCP, Hotjar Blocker, ScalpelPDF).
-- 5 private/personal apps that are live (home, aiemd_platform, ChatHop, az-ma-kore, lumi-kid).
+- 4 private/personal apps that are live (home, ChatHop, az-ma-kore, lumi-kid). (aiemd_platform is intentionally not shown.)
 - 2 standalone Netlify sites with no Git repo (Bolt build, Netlify Drop).
 
 **Out of scope (for now):** the ~40 older repos and forks not selected for the showcase.

@@ -9,35 +9,30 @@ test.describe("home responsiveness", () => {
     expect(overflow).toBeLessThanOrEqual(1); // allow sub-pixel rounding
   });
 
-  test("renders all 19 cards", async ({ page }) => {
+  test("hero headline is visible", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("article")).toHaveCount(19);
+    await expect(
+      page.getByRole("heading", { name: /real products/i })
+    ).toBeVisible();
+  });
+
+  test("renders all 18 cards in the log", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("article")).toHaveCount(18);
   });
 
   test("category filter narrows the grid", async ({ page }) => {
     await page.goto("/");
-    // Use exact: true to distinguish the FilterBar chip from cadence dots whose
-    // aria-labels contain the category name as a substring (e.g. "Hotjar Blocker,
-    // 9 NOV 2025, Extension. View project.").
     await page.getByRole("button", { name: "Extension", exact: true }).click();
     await expect(page.locator("article")).toHaveCount(1);
   });
 
-  test("cadence dot click resets filter to All", async ({ page }) => {
+  test("clearing a filter restores all 18 cards", async ({ page }) => {
     await page.goto("/");
-    // Apply a filter first so we can confirm it resets.
-    // Use exact: true to distinguish FilterBar chip from cadence dot aria-labels.
     await page.getByRole("button", { name: "Education", exact: true }).click();
-    await expect(page.locator("article")).not.toHaveCount(19);
-    // Click first cadence dot — aria-label ends with ". View project."
-    // The .dot CSS Modules class is hashed, so we target by accessible role+name pattern.
-    await page.getByRole("button", { name: /View project/ }).first().click();
-    // After reset, all 19 cards should be visible
-    await expect(page.locator("article")).toHaveCount(19);
-    // the clicked dot flashes + scrolls to its card
-    const flashed = page.locator("article.flash");
-    await expect(flashed).toHaveCount(1);
-    await expect(flashed).toBeInViewport();
+    await expect(page.locator("article")).not.toHaveCount(18);
+    await page.getByRole("button", { name: "All", exact: true }).click();
+    await expect(page.locator("article")).toHaveCount(18);
   });
 });
 
