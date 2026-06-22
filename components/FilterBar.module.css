@@ -1,6 +1,6 @@
 .filterbar {
   position: sticky;
-  top: env(safe-area-inset-top);
+  top: max(0px, env(safe-area-inset-top));
   z-index: 30;
   margin-top: 34px;
   background: rgba(230, 231, 226, 0.86);
