@@ -1,0 +1,90 @@
+/* components/ProjectRow.module.css */
+.row{
+  position:relative;
+  border-bottom:1px solid var(--line);
+  --cat:var(--accent);
+}
+.row:last-child{border-bottom:0}
+.row details{margin:0}
+
+.summary{
+  list-style:none;cursor:pointer;
+  display:grid;
+  grid-template-columns:16px 16px 1fr auto;
+  grid-template-areas:
+    "tri glyph name date"
+    "tri glyph tech tech";
+  gap:2px 12px;align-items:center;
+  padding:13px 12px;border-radius:9px;border:1px solid transparent;
+  font-family:var(--mono);
+  transition:background .12s ease, border-color .12s ease;
+}
+.summary::-webkit-details-marker{display:none}
+.summary::marker{content:""}
+.summary:hover{
+  background:var(--card-hi);
+  border-color:color-mix(in srgb,var(--cat) 40%,var(--line));
+}
+.summary:focus-visible{outline:2px solid var(--accent-glow);outline-offset:2px}
+
+.tri{grid-area:tri;color:var(--ink-3);font-size:13px;transition:transform .15s ease}
+details[open] .tri{transform:rotate(90deg)}
+.glyph{grid-area:glyph;font-size:15px;color:var(--ink-2)}
+.glyph.live{color:var(--live)}
+.glyph.public{color:var(--ink-2)}
+.glyph.fork,.glyph.norepo{color:var(--fork)}
+
+.name{grid-area:name;min-width:0;color:var(--ink);font-weight:600;font-size:15px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.status{color:var(--ink-3);font-weight:500;font-size:12px}
+.tech{grid-area:tech;color:var(--ink-3);font-size:12.5px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.date{grid-area:date;justify-self:end;color:var(--ink-3);font-size:12.5px;white-space:nowrap}
+
+/* single-row "ls -l" layout once there's width */
+@media (min-width:640px){
+  .summary{
+    grid-template-columns:16px 16px minmax(0,1fr) auto auto;
+    grid-template-areas:"tri glyph name tech date";
+    column-gap:16px;
+  }
+  .tech{justify-self:end}
+}
+
+.panel{
+  padding:6px 12px 18px 44px;
+  margin:0 0 6px 7px;
+  border-left:2px solid color-mix(in srgb,var(--cat) 70%,transparent);
+  background:color-mix(in srgb,var(--cat) 6%,transparent);
+  border-radius:0 9px 9px 0;
+}
+.steps{list-style:none;font-family:var(--mono);font-size:13px;margin-bottom:12px}
+.step{color:var(--ink-3);padding:2px 0}
+.ck{color:var(--live);margin-right:10px}
+.dur{opacity:.55;margin-left:8px}
+
+.tagline{color:var(--cat);font-weight:700;font-size:15px;margin-bottom:6px}
+.desc{color:var(--ink);font-size:14px;line-height:1.6;margin-bottom:16px;max-width:640px}
+
+.links{display:flex;gap:8px;flex-wrap:wrap}
+.links a{
+  font-family:var(--mono);font-size:12px;letter-spacing:.03em;
+  padding:6px 11px;border-radius:7px;border:1px solid var(--line-2);
+  background:var(--card-hi);color:var(--ink-2);
+  transition:border-color .15s ease, color .15s ease;
+}
+.links a:hover{border-color:var(--cat);color:#fff}
+.links a.open{background:var(--accent);border-color:var(--accent);color:#fff}
+.links a.npm{color:var(--c-ext)}
+.links a.play,.links a.store{color:var(--live)}
+
+/* build-step reveal — animate only when motion is allowed */
+@media (prefers-reduced-motion: no-preference){
+  details[open] .step{opacity:0;animation:stepIn .26s ease forwards}
+  details[open] .step:nth-child(1){animation-delay:.03s}
+  details[open] .step:nth-child(2){animation-delay:.12s}
+  details[open] .step:nth-child(3){animation-delay:.21s}
+  details[open] .step:nth-child(4){animation-delay:.30s}
+  details[open] .step:nth-child(5){animation-delay:.39s}
+}
+@keyframes stepIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
