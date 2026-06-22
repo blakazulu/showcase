@@ -1,0 +1,16 @@
+{
+  "controls": [
+    {
+      "sid": "bgColor",
+      "label": "Background color"
+    },
+    {
+      "sid": "accentColor",
+      "label": "Aurora / prompt accent"
+    },
+    {
+      "sid": "checkColor",
+      "label": "Build-step ✓ color"
+    }
+  ]
+}
