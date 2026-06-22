@@ -4,36 +4,60 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-file, no-build personal portfolio: `showcase.html` presents Liraz Amir's shipped projects as a filterable index. There is no package manager, bundler, test runner, or framework — it is hand-authored HTML/CSS/vanilla JS with web fonts from Google Fonts. Read `GOALS.md` first; it is the spec and the source of intent (mission, scope, success criteria, status).
+Next.js 15 App Router portfolio — Liraz Amir's 19 shipped projects as a filterable, static-exported site deployed to Netlify (`sbz-showcase.netlify.app`) on every push to `main`. Stack: React 19, TypeScript strict, CSS Modules + design tokens, static export (`output: 'export'`). Read `docs/GOALS.md` first; it holds the mission, scope, and honesty constraints. `docs/git_netlify_projects.csv` is the raw project inventory.
 
 ## Commands
 
-- **Preview:** open `showcase.html` directly in a browser (`Start-Process showcase.html` on Windows). No server needed — it works from `file://`, though the live-site links and Google Fonts require network.
-- **Sanity-check the embedded JS** (there is no test suite) by parsing/running the `<script>` block against a stubbed DOM with Node, e.g. stub `window.matchMedia`, `requestAnimationFrame`, `setTimeout`, and `document.{getElementById,createElement}`, then `new Function(js)()`. This catches syntax/reference errors before opening the page.
+- `npm run dev` — local dev server (hot reload)
+- `npm run build` — static export to `out/` (runs `next build`)
+- `npm test` — Vitest unit tests (`components/__tests__/`)
+- `npm run test:e2e` — Playwright responsive matrix (runs `next build` first; tests home + detail pages across 6 viewports)
 
 ## Architecture
 
-Three files form one pipeline — changing project facts means touching the right layer:
+### `lib/` — single source of truth
 
-1. **`git_netlify_projects.csv`** — the raw inventory (every repo ↔ Netlify deployment, with visibility, language, deploy source, and `Last Published` date). This is the upstream source of truth for *which* projects exist and their deploy dates.
-2. **`GOALS.md`** — mission, scope (19 entries: public / private / fork / no-repo), and the **honesty constraint** that governs all content (see below).
-3. **`showcase.html`** — the artifact. All rendered content lives in the `PROJECTS` array near the top of the inline `<script>`; everything on the page is derived from it. The CSV and the array are maintained by hand and can drift — when they disagree, the array is what ships, but reconcile deliberately.
+- `types.ts` — `Project`, `Visibility`, `Category` types
+- `projects.ts` — the 19 projects array (the only place project data lives)
+- `helpers.ts` — `COLORS`, `LANE_ORDER`, `PRIORITY`, `primaryCat`, `fmtDate`, `slug`, `sortByDateDesc`, `getStats`
 
-### `PROJECTS` data model
+### Components (`components/`)
 
-Each entry: `name, tagline, date` (ISO `YYYY-MM-DD` or `null`), `cats[]`, `vis` (`Public|Private|Fork|Standalone`), `icon`, `desc`, `tech[]`, and optional `live` / `github` / `npm` links. Adding or editing a project = editing this array; nothing else is required.
+Each component has a co-located CSS Module. Two client islands, everything else is a Server Component:
 
-### Derived rendering (don't hardcode what's computed)
+- **`CadenceChart`** (`"use client"`) — SVG deploy-cadence chart; dots plotted from `date` fields; undated projects excluded + footnoted. Clicking a dot dispatches `window.dispatchEvent(new Event("showcase:reset-filter"))` then scrolls to the card and flashes it (`article.flash`).
+- **`HomeFilter`** (`"use client"`) — category filter chips + project grid. Listens for `showcase:reset-filter` to reset to "All".
 
-- **Stats strip** (shipped/live/on-npm/AI-powered/domains) is computed from `PROJECTS` at runtime — never hardcode counts.
-- **Deploy-cadence chart** (the hero signature) is built from `date` fields: dots are plotted by date across **swimlanes**, one per domain. `date: null` projects are intentionally excluded from the timeline and listed in the chart footnote instead — do not invent dates to place them.
-- **Categories & colors:** `LANE_ORDER` sets lane stacking and the `COLORS` map; `PRIORITY` + `primaryCat()` pick the single lane/spine color for a multi-category project (e.g. AI Image Generator resolves to *Dev Tool*, STEM/Lumi to *Education*). The same color drives the card's left spine and category tag, so the chart and cards stay visually linked. Adjust bucketing by editing `PRIORITY`, not per-card.
-- **Card grid** is sorted newest-first (nulls last) and filtered by the chips built from `LANE_ORDER`.
+### Pages
 
-### Design system (see the `:root` token block)
+- `app/page.tsx` — Home: `Hero` wraps `CadenceChart` + `StatStrip` as children for single-`.wrap` alignment; `HomeFilter` below.
+- `app/projects/[slug]/page.tsx` — per-project detail pages via `generateStaticParams` (one per project slug) + `generateMetadata`.
 
-Deliberate "deploy log / drafting-table" identity: cool putty paper, **flat color only — no gradients/glow**, cobalt accent, faint drafting grid, small radius. Type roles: Archivo (display), Hanken Grotesk (body), IBM Plex Mono (all metadata/dates/status). Keep changes within these tokens rather than introducing new ad-hoc colors. Motion is gated behind `prefers-reduced-motion`; preserve that.
+### Cross-island event contract
 
-## Content rule (non-negotiable, from GOALS.md)
+CadenceChart dot click → `showcase:reset-filter` window event → HomeFilter resets to "All" → chart scrolls to card (which carries the global `flash` class from `app/globals.css`).
 
-Credibility is the whole point. Descriptions must be sourced from the project's README or live site — never inflated or guessed. Labels must stay accurate: `Private` = live but source-closed, `Fork` and `Standalone` (no-repo) labeled as such. Two known live-site corrections already applied vs. the CSV: `az-ma-kore` is a national Pikud HaOref alert-analysis dashboard (not "Dimona alarms"), and `lumi-kid` is an AI English tutor with Meitzav prep (not a generic "personal teacher") — match the live truth, not the inventory shorthand.
+### Derived rendering (never hardcode computed values)
+
+- Stats strip (shipped/live/on-npm/AI/domains) computed at runtime from `PROJECTS` via `getStats`.
+- Cadence dots placed from `date` fields; `date: null` projects are excluded from the timeline and listed in the chart footnote.
+- Category bucketing via `PRIORITY` / `primaryCat`; spine color driven by `COLORS[primaryCat(p)]`.
+- Card grid: `sortByDateDesc` (nulls last), filtered by active chip.
+
+### CSS conventions
+
+- `.flash` and `@keyframes flash` live in `app/globals.css` (global). All other animations live in component module files, gated under `@media (prefers-reduced-motion: no-preference)`.
+- Design tokens in `app/globals.css` `:root`: cool-putty palette, flat color only (no gradients/glow), cobalt accent, IBM Plex Mono for metadata/dates. Do not introduce ad-hoc colors outside the token block.
+- `style={{ "--cat": COLORS[cat] } as React.CSSProperties}` pattern for CSS custom properties in TSX (TypeScript safe cast).
+
+## Responsive / safe-area rule
+
+Fully mobile-first. `viewport-fit=cover` + `env(safe-area-inset-*)` via `max()` floors. Run `npm run test:e2e` after any UI change — it's the cross-resolution gate across 6 device viewports.
+
+## Deploy safety
+
+Push to `main` auto-deploys to production — **only push with explicit user approval**. `netlify.toml` at repo root tells Netlify to run `npm run build` and publish `out/`.
+
+## Content rule (non-negotiable)
+
+Credibility is the point. Descriptions must be sourced from the project's README or live site — never inflated or guessed. Status labels must stay accurate: `Private` = live but source-closed, `Fork` = forked repo, `Standalone` = no linked Git repo. Two known live-site corrections vs. the CSV: `az-ma-kore` is a national Pikud HaOref alert-analysis dashboard (not "Dimona alarms"); `lumi-kid` is an AI English tutor with Meitzav prep (not a generic "personal teacher"). Match the live truth, not the inventory shorthand.
