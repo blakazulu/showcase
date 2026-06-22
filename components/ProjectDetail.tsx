@@ -30,11 +30,15 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
         </Link>
 
         <div className={s.meta}>
-          <span className={`${s.status} ${s[sc]}`}>
-            <span className={s.d} />
-            {sl}
-          </span>
-          <span className={s.sep}>/</span>
+          {p.vis !== "Private" && (
+            <>
+              <span className={`${s.status} ${s[sc]}`}>
+                <span className={s.d} />
+                {sl}
+              </span>
+              <span className={s.sep}>/</span>
+            </>
+          )}
           <span>{fmtDate(p.date)}</span>
           <span className={s.cat}>{cat}</span>
         </div>
