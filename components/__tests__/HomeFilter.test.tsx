@@ -6,11 +6,11 @@ import HomeFilter from "../HomeFilter";
 describe("HomeFilter", () => {
   it("shows all projects by default and filters on chip click", () => {
     render(<HomeFilter />);
-    const grid = screen.getByTestId("project-grid");
-    expect(within(grid).getAllByRole("article")).toHaveLength(18);
+    const list = screen.getByTestId("project-list");
+    expect(within(list).getAllByRole("article")).toHaveLength(18);
     fireEvent.click(screen.getByRole("button", { name: "Extension" }));
     // only Hotjar Blocker is an Extension
-    expect(within(grid).getAllByRole("article")).toHaveLength(1);
-    expect(within(grid).getByText("Hotjar Blocker")).toBeInTheDocument();
+    expect(within(list).getAllByRole("article")).toHaveLength(1);
+    expect(within(list).getByText("Hotjar Blocker")).toBeInTheDocument();
   });
 });

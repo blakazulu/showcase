@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import s from "./HomeFilter.module.css";
-import ProjectGrid from "./ProjectGrid";
+import ProjectList from "./ProjectList";
 import CountUp from "./CountUp";
 import { PROJECTS } from "@/lib/projects";
 import { sortByDateDesc, LANE_ORDER, getStats } from "@/lib/helpers";
@@ -74,7 +74,7 @@ export default function HomeFilter() {
             </div>
 
             <div className={`grid-reveal ${ready ? "is-ready" : ""}`}>
-              <ProjectGrid projects={list} />
+              <ProjectList projects={list} />
             </div>
             <noscript>
               <style>{`.grid-reveal{opacity:1 !important}`}</style>
