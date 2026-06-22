@@ -19,12 +19,7 @@ export function fmtDate(iso: string | null): string {
 }
 
 export function slug(s: string): string {
-  return s
-    .replace(/\([^)]*[^\x00-\x7F][^)]*\)/g, "") // strip parens that contain non-ASCII chars
-    .replace(/[^\x00-\x7F]+/g, "")               // strip remaining non-ASCII chars
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
 export function sortByDateDesc(list: Project[]): Project[] {

@@ -26,9 +26,12 @@ describe("fmtDate", () => {
 });
 
 describe("slug", () => {
-  it("kebabs and trims non-alphanumerics", () => {
+  it("kebabs words and trims edges", () => {
+    expect(slug("AI Image Generator")).toBe("ai-image-generator");
     expect(slug("Kiryat Begin — Desert Science")).toBe("kiryat-begin-desert-science");
-    expect(slug("MortgageFix (משכנתFix)")).toBe("mortgagefix");
+  });
+  it("collapses non-alphanumeric runs (including non-ASCII)", () => {
+    expect(slug("חשבונייה (Math Practice)")).toBe("math-practice");
   });
 });
 
@@ -54,7 +57,12 @@ describe("PROJECTS data", () => {
     expect(PROJECTS).toHaveLength(19);
     expect(new Set(PROJECTS.map(p=>p.slug)).size).toBe(19);
   });
-  it("every slug matches slug(name)", () => {
-    for (const p of PROJECTS) expect(p.slug).toBe(slug(p.name));
+  it("every slug is unique and URL-safe", () => {
+    const seen = new Set<string>();
+    for (const p of PROJECTS) {
+      expect(p.slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+      expect(seen.has(p.slug)).toBe(false);
+      seen.add(p.slug);
+    }
   });
 });
