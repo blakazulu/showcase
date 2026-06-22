@@ -17,3 +17,7 @@
   letter-spacing: 0;
   margin-right: 5px;
 }
+
+@media (prefers-reduced-motion: no-preference){
+  .stats{ animation: rise .6s cubic-bezier(.2,.7,.2,1) both; animation-delay: .12s; }
+}

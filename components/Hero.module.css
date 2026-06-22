@@ -46,3 +46,8 @@
 @media (max-width: 560px) {
   .hero { padding: 42px 0 12px; }
 }
+
+@media (prefers-reduced-motion: no-preference){
+  .eyebrow .pulse{ animation: pulse 2.4s ease-out infinite; }
+  .hero{ animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
+}
