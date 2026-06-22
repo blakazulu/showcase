@@ -44,6 +44,7 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
           <span>{fmtDate(p.date)}</span>
           <span className={s.cat}>{cat}</span>
           {p.play && <span className={s.android}>Android app</span>}
+          {p.store && <span className={s.windows}>Windows app</span>}
         </div>
 
         <h1 className={s.title}>
@@ -79,6 +80,11 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
           {p.play && (
             <a className={s.play} href={p.play} target="_blank" rel="noopener">
               Google Play ↗
+            </a>
+          )}
+          {p.store && (
+            <a className={s.store} href={p.store} target="_blank" rel="noopener">
+              Microsoft Store ↗
             </a>
           )}
         </div>

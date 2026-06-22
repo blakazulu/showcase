@@ -134,8 +134,9 @@ export const PROJECTS: Project[] = [
 
   { name: "ScalpelPDF", slug: "scalpelpdf", tagline: "Edit PDFs, keep your privacy", date: null,
     cats: ["Dev Tool"], vis: "Fork", icon: "📄",
-    short: "A Windows PDF editor with no account, no subscription and no telemetry.",
-    desc: "PDF editing without the strings. ScalpelPDF is a Windows editor you can install or run portable — no account, no subscription, no telemetry, ever. GPLv3 open source, forked from KillerPDF.",
+    short: "A Windows PDF editor — now on the Microsoft Store — with no account, no subscription and no telemetry.",
+    desc: "PDF editing without the strings. ScalpelPDF is a Windows editor you can grab from the Microsoft Store, install, or run portable — no account, no subscription, no telemetry, ever. GPLv3 open source, forked from KillerPDF.",
     tech: ["C#",".NET","GPLv3"],
-    github: "https://github.com/blakazulu/ScalpelPDF" },
+    github: "https://github.com/blakazulu/ScalpelPDF",
+    store: "https://apps.microsoft.com/detail/9n9hn8xw4lf3" },
 ];

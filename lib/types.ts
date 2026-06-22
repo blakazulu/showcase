@@ -16,6 +16,7 @@ export interface Project {
   github?: string;
   npm?: string;
   play?: string;             // Google Play store listing
+  store?: string;            // Microsoft Store listing
   highlights?: string[];      // empty for now — honest expansion later
   screenshots?: string[];     // empty for now
 }

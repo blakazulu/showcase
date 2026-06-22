@@ -40,6 +40,9 @@
 .android{color:var(--live);font-weight:600;
   border:1px solid color-mix(in srgb,var(--live) 40%,var(--line));
   padding:3px 9px;border-radius:999px}
+.windows{color:var(--accent-glow);font-weight:600;
+  border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));
+  padding:3px 9px;border-radius:999px}
 
 .body{display:flex;flex-direction:column;gap:5px}
 .name{font-family:var(--display);font-weight:800;font-size:1.35rem;letter-spacing:-.02em;line-height:1.12}
@@ -79,6 +82,8 @@
 .links a.npm:hover{border-color:var(--c-ext);color:var(--c-ext)}
 .links a.play{color:var(--live);border-color:color-mix(in srgb,var(--live) 40%,var(--line))}
 .links a.play:hover{border-color:var(--live);color:var(--live)}
+.links a.store{color:var(--accent-glow);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.links a.store:hover{border-color:var(--accent-glow);color:var(--accent-glow)}
 
 /* featured tile — spans wider, shows description */
 .featured .name{font-size:2rem}

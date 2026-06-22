@@ -46,6 +46,7 @@ export default function ProjectCard({
         )}
         <span className={s.badges}>
           {p.play && <span className={s.android}>Android app</span>}
+          {p.store && <span className={s.windows}>Windows app</span>}
           <span className={s.cat}>{cat}</span>
         </span>
       </div>
@@ -89,6 +90,11 @@ export default function ProjectCard({
           {p.play && (
             <a className={s.play} href={p.play} target="_blank" rel="noopener">
               play ↗
+            </a>
+          )}
+          {p.store && (
+            <a className={s.store} href={p.store} target="_blank" rel="noopener">
+              store ↗
             </a>
           )}
         </div>
