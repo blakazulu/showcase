@@ -32,7 +32,7 @@ Each component has a co-located CSS Module. Client islands are `AuroraHero`, `Au
 - **`AuroraShader`** (`"use client"`) — a single full-screen R3F `<ScreenQuad>` fragment shader (flowing fbm aurora, one draw call). Dynamic-imported with `ssr:false` so static export stays intact. Purely a visual accent; the site is fully usable without it.
 - **`HomeFilter`** (`"use client"`) — the "deploy log" console: a terminal window (traffic-light chrome + sticky header with live KPI chips), a prompt line that updates with the active filter (`--all` / `--cat=…`), an output count line, category filter chips (`<button>` per category), and `ProjectList`.
 - **`ProjectRow`** — a console-styled, expandable terminal row (the project "deploy log" line). A native `<details name="projects">` (free keyboard support, no-JS fallback, native single-open accordion): the `<summary>` is an `ls -l` line (disclosure triangle · status glyph · name + status label, hidden for `Private` · tech · date), and the panel reveals a staggered `✓` build-step animation, the `tagline`, the long `desc`, and the link row (`open ↗` to `/projects/[slug]` plus `live`/`github`/`npm`/`play`/`store`). Accent driven by `COLORS[primaryCat(p)]` (`--cat`).
-- **`ProjectList`** — the terminal output region (`data-testid="project-list"`); renders one `ProjectRow` per project and pre-expands the newest project by date (`sortByDateDesc(projects)[0]`).
+- **`ProjectList`** — the terminal output region (`data-testid="project-list"`); renders one `ProjectRow` per project, and pins the newest project by date (`sortByDateDesc(projects)[0]`) to the top **and** pre-expands it (the remaining rows keep `HomeFilter`'s shuffled order).
 
 ### Pages
 
@@ -43,7 +43,7 @@ Each component has a co-located CSS Module. Client islands are `AuroraHero`, `Au
 
 - KPI chips (shipped/live/AI/npm) and the output count line are computed at runtime from `PROJECTS` via `getStats` / the filtered list.
 - Category bucketing via `PRIORITY` / `primaryCat`; row accent driven by `COLORS[primaryCat(p)]` (the `--cat` CSS var).
-- List order: `sortByDateDesc` (nulls last), filtered by the active chip; newest project pre-expanded.
+- List order: `HomeFilter` shuffles per visit, filtered by the active chip; `ProjectList` then pins the newest project to the top and pre-expands it.
 
 ### CSS conventions
 

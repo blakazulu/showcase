@@ -26,4 +26,14 @@ describe("ProjectList", () => {
     // the open row is the 'newest' article
     expect(openDetails[0].closest("article")).toContainElement(screen.getByText("newest"));
   });
+
+  it("pins the newest project to the top, preserving the rest of the order", () => {
+    const { container } = render(<ProjectList projects={projects} />);
+    const articles = container.querySelectorAll("article");
+    // newest is first even though it arrived in the middle of the input
+    expect(articles[0]).toContainElement(screen.getByText("newest"));
+    // the remaining rows keep their incoming relative order (old before mid)
+    expect(articles[1]).toContainElement(screen.getByText("old"));
+    expect(articles[2]).toContainElement(screen.getByText("mid"));
+  });
 });
