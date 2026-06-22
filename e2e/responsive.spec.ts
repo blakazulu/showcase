@@ -34,6 +34,10 @@ test.describe("home responsiveness", () => {
     await page.getByRole("button", { name: /View project/ }).first().click();
     // After reset, all 19 cards should be visible
     await expect(page.locator("article")).toHaveCount(19);
+    // the clicked dot flashes + scrolls to its card
+    const flashed = page.locator("article.flash");
+    await expect(flashed).toHaveCount(1);
+    await expect(flashed).toBeInViewport();
   });
 });
 
