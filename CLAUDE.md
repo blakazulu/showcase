@@ -25,7 +25,7 @@ Next.js 15 App Router portfolio — Liraz Amir's 19 shipped projects as a filter
 
 Each component has a co-located CSS Module. Two client islands, everything else is a Server Component:
 
-- **`CadenceChart`** (`"use client"`) — SVG deploy-cadence chart; dots plotted from `date` fields; undated projects excluded + footnoted. Clicking a dot dispatches `window.dispatchEvent(new Event("showcase:reset-filter"))` then scrolls to the card and flashes it (`article.flash`).
+- **`CadenceChart`** (`"use client"`) — deploy-cadence chart; dots are absolutely-positioned `<button>` elements in a `<div>` plot (not SVG), plotted from `date` fields; undated projects excluded + footnoted. Clicking a dot dispatches `window.dispatchEvent(new Event("showcase:reset-filter"))` then scrolls to the card and flashes it (`article.flash`).
 - **`HomeFilter`** (`"use client"`) — category filter chips + project grid. Listens for `showcase:reset-filter` to reset to "All".
 
 ### Pages
