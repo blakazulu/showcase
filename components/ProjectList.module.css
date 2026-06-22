@@ -1,0 +1,8 @@
+/* components/ProjectList.module.css */
+.list{
+  display:flex;flex-direction:column;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:linear-gradient(180deg,var(--card-2),var(--card));
+  overflow:hidden;
+}
