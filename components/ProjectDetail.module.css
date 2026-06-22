@@ -102,3 +102,20 @@
   .title{gap:12px}
   .links a{font-size:11.5px;padding:10px 14px}
 }
+
+.relcard{
+  display:grid;grid-template-columns:auto 1fr;grid-template-areas:"ic name" "ic tag";
+  gap:2px 12px;align-items:center;min-width:0;
+  padding:14px 16px;border:1px solid var(--line);border-radius:11px;
+  background:linear-gradient(180deg,var(--card-2),var(--card));
+  transition:border-color .15s ease, transform .15s ease;
+}
+.relcard:hover{border-color:color-mix(in srgb,var(--cat) 45%,var(--line));transform:translateY(-3px)}
+.relic{grid-area:ic;display:inline-flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:10px;color:var(--cat);
+  background:color-mix(in srgb,var(--cat) 13%,transparent);
+  border:1px solid color-mix(in srgb,var(--cat) 28%,transparent)}
+.relname{grid-area:name;min-width:0;font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--ink)}
+.relcard:hover .relname{color:var(--cat)}
+.reltag{grid-area:tag;min-width:0;font-size:.85rem;color:var(--ink-2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

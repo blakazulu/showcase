@@ -1,6 +1,5 @@
 import Link from "next/link";
 import s from "./ProjectDetail.module.css";
-import ProjectCard from "./ProjectCard";
 import ProjectIcon from "./ProjectIcon";
 import MagicRingsLayer from "./MagicRingsLayer";
 import type { Project } from "@/lib/types";
@@ -121,9 +120,23 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
           <section className={s.related}>
             <p className={s.kicker}>// related — more {cat.toLowerCase()}</p>
             <div className={s.relgrid}>
-              {related.map((r) => (
-                <ProjectCard key={r.slug} project={r} />
-              ))}
+              {related.map((r) => {
+                const rc = primaryCat(r);
+                return (
+                  <Link
+                    key={r.slug}
+                    href={`/projects/${r.slug}`}
+                    className={s.relcard}
+                    style={{ "--cat": COLORS[rc] } as React.CSSProperties}
+                  >
+                    <span className={s.relic} aria-hidden="true">
+                      <ProjectIcon slug={r.slug} size={20} />
+                    </span>
+                    <span className={s.relname}>{r.name}</span>
+                    <span className={s.reltag}>{r.tagline}</span>
+                  </Link>
+                );
+              })}
             </div>
           </section>
         )}
