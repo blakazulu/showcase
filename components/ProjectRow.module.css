@@ -28,7 +28,7 @@
 .summary:focus-visible{outline:2px solid var(--accent-glow);outline-offset:2px}
 
 .tri{grid-area:tri;color:var(--ink-3);font-size:13px;transition:transform .15s ease}
-details[open] .tri{transform:rotate(90deg)}
+.row details[open] .tri{transform:rotate(90deg)}
 .glyph{grid-area:glyph;font-size:15px;color:var(--ink-2)}
 .glyph.live{color:var(--live)}
 .glyph.public{color:var(--ink-2)}
@@ -80,11 +80,11 @@ details[open] .tri{transform:rotate(90deg)}
 
 /* build-step reveal — animate only when motion is allowed */
 @media (prefers-reduced-motion: no-preference){
-  details[open] .step{opacity:0;animation:stepIn .26s ease forwards}
-  details[open] .step:nth-child(1){animation-delay:.03s}
-  details[open] .step:nth-child(2){animation-delay:.12s}
-  details[open] .step:nth-child(3){animation-delay:.21s}
-  details[open] .step:nth-child(4){animation-delay:.30s}
-  details[open] .step:nth-child(5){animation-delay:.39s}
+  .row details[open] .step{opacity:0;animation:prRowStepIn .26s ease forwards}
+  .row details[open] .step:nth-child(1){animation-delay:.03s}
+  .row details[open] .step:nth-child(2){animation-delay:.12s}
+  .row details[open] .step:nth-child(3){animation-delay:.21s}
+  .row details[open] .step:nth-child(4){animation-delay:.30s}
+  .row details[open] .step:nth-child(5){animation-delay:.39s}
 }
-@keyframes stepIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+@keyframes prRowStepIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
