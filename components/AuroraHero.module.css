@@ -47,8 +47,8 @@
   display:flex;align-items:center;gap:8px;flex-wrap:wrap;
 }
 .pr{color:var(--live)}
-.fl{color:var(--accent-glow)}
-.cursor{display:inline-block;width:9px;height:17px;background:var(--accent);vertical-align:-3px;animation:blink 1s steps(2) infinite}
+.cmd{color:var(--accent-glow)}
+.cursor{display:inline-block;width:9px;height:17px;background:var(--accent);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(2) infinite}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 
 @media (prefers-reduced-motion: reduce){

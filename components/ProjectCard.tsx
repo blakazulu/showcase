@@ -1,8 +1,18 @@
+"use client";
 import Link from "next/link";
 import s from "./ProjectCard.module.css";
 import ProjectIcon from "./ProjectIcon";
 import type { Project } from "@/lib/types";
 import { primaryCat, COLORS, fmtDate } from "@/lib/helpers";
+
+// Magic-Bento-style cursor spotlight: track the pointer position as CSS vars
+// so the tile's radial glow (::after) follows the cursor.
+function onSpotlightMove(e: React.MouseEvent<HTMLElement>) {
+  const t = e.currentTarget;
+  const r = t.getBoundingClientRect();
+  t.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  t.style.setProperty("--my", `${e.clientY - r.top}px`);
+}
 
 function statusInfo(p: Project): [string, string] {
   if (p.vis === "Private") return ["private", "Private"];
@@ -24,6 +34,7 @@ export default function ProjectCard({
     <article
       className={`${s.tile} ${featured ? s.featured : ""}`}
       id={p.slug}
+      onMouseMove={onSpotlightMove}
       style={{ "--cat": COLORS[cat] } as React.CSSProperties}
     >
       <div className={s.top}>
@@ -33,7 +44,10 @@ export default function ProjectCard({
             {sl}
           </span>
         )}
-        <span className={s.cat}>{cat}</span>
+        <span className={s.badges}>
+          {p.play && <span className={s.android}>Android app</span>}
+          <span className={s.cat}>{cat}</span>
+        </span>
       </div>
 
       <div className={s.body}>
@@ -69,6 +83,11 @@ export default function ProjectCard({
           {p.npm && (
             <a className={s.npm} href={p.npm} target="_blank" rel="noopener">
               npm
+            </a>
+          )}
+          {p.play && (
+            <a className={s.play} href={p.play} target="_blank" rel="noopener">
+              play ↗
             </a>
           )}
         </div>

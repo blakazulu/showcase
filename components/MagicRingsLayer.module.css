@@ -1,0 +1,13 @@
+/* Sits above the site-wide aurora (root z-index:-1) but behind page content,
+   because .detail establishes its own stacking context. Screen-blended + faded
+   toward the bottom so the log/related content below stays readable. */
+.layer{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  mix-blend-mode:screen;
+  opacity:.7;
+  -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 45%, transparent 78%);
+  mask-image:linear-gradient(180deg, #000 0%, #000 45%, transparent 78%);
+}

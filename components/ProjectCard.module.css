@@ -13,8 +13,9 @@
   background:var(--cat,var(--accent));opacity:.8;transition:box-shadow .2s ease,opacity .2s ease;
 }
 .tile::after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .2s ease;
-  background:radial-gradient(120% 80% at 0 0,color-mix(in srgb,var(--cat,var(--accent)) 14%,transparent),transparent 55%);
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s ease;
+  background:radial-gradient(220px circle at var(--mx,50%) var(--my,0%),
+    color-mix(in srgb,var(--cat,var(--accent)) 22%,transparent),transparent 60%);
 }
 .tile:hover{
   transform:translateY(-4px);
@@ -32,8 +33,12 @@
 .status .d{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
 .live{color:var(--live)} .public{color:var(--ink-2)} .private{color:var(--private)}
 .fork{color:var(--fork)} .norepo{color:var(--fork)}
-.cat{margin-left:auto;color:var(--cat,var(--accent));font-weight:600;
+.badges{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.cat{color:var(--cat,var(--accent));font-weight:600;
   border:1px solid color-mix(in srgb,var(--cat,var(--accent)) 38%,var(--line));
+  padding:3px 9px;border-radius:999px}
+.android{color:var(--live);font-weight:600;
+  border:1px solid color-mix(in srgb,var(--live) 40%,var(--line));
   padding:3px 9px;border-radius:999px}
 
 .body{display:flex;flex-direction:column;gap:5px}
@@ -71,6 +76,8 @@
 .links a.primary:hover{background:var(--accent-deep)}
 .links a.npm{color:var(--c-ext);border-color:color-mix(in srgb,var(--c-ext) 40%,var(--line))}
 .links a.npm:hover{border-color:var(--c-ext);color:var(--c-ext)}
+.links a.play{color:var(--live);border-color:color-mix(in srgb,var(--live) 40%,var(--line))}
+.links a.play:hover{border-color:var(--live);color:var(--live)}
 
 /* featured tile — spans wider, shows description */
 .featured .name{font-size:2rem}

@@ -14,6 +14,7 @@ export interface Project {
   live?: string;
   github?: string;
   npm?: string;
+  play?: string;             // Google Play store listing
   highlights?: string[];      // empty for now — honest expansion later
   screenshots?: string[];     // empty for now
 }

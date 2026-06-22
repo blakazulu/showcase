@@ -1,7 +1,8 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import s from "./HomeFilter.module.css";
 import ProjectGrid from "./ProjectGrid";
+import CountUp from "./CountUp";
 import { PROJECTS } from "@/lib/projects";
 import { sortByDateDesc, LANE_ORDER, getStats } from "@/lib/helpers";
 
@@ -10,10 +11,24 @@ const stats = getStats(PROJECTS);
 
 export default function HomeFilter() {
   const [active, setActive] = useState("All");
-  const display = useMemo(() => sortByDateDesc(PROJECTS), []);
+  // Deterministic order for SSR/first paint (kept hidden), then randomized on
+  // the client before reveal — so visitors see a fresh random order from load
+  // (and a fresh "featured" tile) with no visible re-shuffle, and no hydration
+  // mismatch.
+  const [ordered, setOrdered] = useState(() => sortByDateDesc(PROJECTS));
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const a = [...PROJECTS];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    setOrdered(a);
+    setReady(true);
+  }, []);
   const list = useMemo(
-    () => display.filter((p) => active === "All" || p.cats.includes(active as never)),
-    [active, display]
+    () => ordered.filter((p) => active === "All" || p.cats.includes(active as never)),
+    [active, ordered]
   );
 
   const flag = active === "All" ? "--all" : `--cat=${active.toLowerCase().replace(/\s+/g, "-")}`;
@@ -28,10 +43,10 @@ export default function HomeFilter() {
             </span>
             <span className={s.path}>liraz@portfolio: ~/projects</span>
             <span className={s.kpis}>
-              <span><b>{stats.shipped}</b> shipped</span>
-              <span><b>{stats.live}</b> live</span>
-              <span><b>{stats.ai}</b> AI</span>
-              <span><b>{stats.npm}</b> npm</span>
+              <span><b><CountUp to={stats.shipped} /></b> shipped</span>
+              <span><b><CountUp to={stats.live} /></b> live</span>
+              <span><b><CountUp to={stats.ai} /></b> AI</span>
+              <span><b><CountUp to={stats.npm} /></b> npm</span>
             </span>
           </header>
 
@@ -58,7 +73,12 @@ export default function HomeFilter() {
               ))}
             </div>
 
-            <ProjectGrid projects={list} />
+            <div className={`grid-reveal ${ready ? "is-ready" : ""}`}>
+              <ProjectGrid projects={list} />
+            </div>
+            <noscript>
+              <style>{`.grid-reveal{opacity:1 !important}`}</style>
+            </noscript>
           </div>
         </div>
       </div>

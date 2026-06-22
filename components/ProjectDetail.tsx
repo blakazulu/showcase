@@ -2,6 +2,7 @@ import Link from "next/link";
 import s from "./ProjectDetail.module.css";
 import ProjectCard from "./ProjectCard";
 import ProjectIcon from "./ProjectIcon";
+import MagicRingsLayer from "./MagicRingsLayer";
 import type { Project } from "@/lib/types";
 import { PROJECTS } from "@/lib/projects";
 import { primaryCat, COLORS, fmtDate, sortByDateDesc } from "@/lib/helpers";
@@ -23,6 +24,7 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
   return (
     <article className={s.detail} style={{ "--cat": COLORS[cat] } as React.CSSProperties}>
       <div className={s.glow} aria-hidden="true" />
+      <MagicRingsLayer color={COLORS[cat]} />
 
       <div className="wrap">
         <Link href="/" className={s.back}>
@@ -41,6 +43,7 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
           )}
           <span>{fmtDate(p.date)}</span>
           <span className={s.cat}>{cat}</span>
+          {p.play && <span className={s.android}>Android app</span>}
         </div>
 
         <h1 className={s.title}>
@@ -71,6 +74,11 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
           {p.npm && (
             <a className={s.npm} href={p.npm} target="_blank" rel="noopener">
               npm
+            </a>
+          )}
+          {p.play && (
+            <a className={s.play} href={p.play} target="_blank" rel="noopener">
+              Google Play ↗
             </a>
           )}
         </div>

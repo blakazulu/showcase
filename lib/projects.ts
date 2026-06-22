@@ -21,8 +21,9 @@ export const PROJECTS: Project[] = [
   { name: "ChatHop", slug: "chathop", tagline: "WhatsApp anyone without saving the number", date: "2026-06-09",
     cats: ["Web App"], vis: "Private", icon: "💬",
     desc: "A tiny utility that opens a WhatsApp chat with any phone number directly — no need to add the contact to your phone first. Type the number, hop straight into the conversation.",
-    tech: ["HTML","JavaScript"],
-    live: "https://chathop.netlify.app" },
+    tech: ["HTML","JavaScript","Android"],
+    live: "https://chathop.netlify.app",
+    play: "https://play.google.com/store/apps/details?id=com.chathop.app&hl=en" },
 
   { name: "חשבונייה (Math Practice)", slug: "math-practice", tagline: "Advanced 6th-grade math prep (Hebrew)", date: "2026-05-18",
     cats: ["Education","Web App"], vis: "Public", icon: "➗",

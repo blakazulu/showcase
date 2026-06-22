@@ -1,6 +1,7 @@
 "use client";
 import { useCallback } from "react";
 import s from "./AuroraHero.module.css";
+import TypeText from "./TypeText";
 import { getStats } from "@/lib/helpers";
 import { PROJECTS } from "@/lib/projects";
 
@@ -40,8 +41,11 @@ export default function AuroraHero() {
         </div>
 
         <div className={s.prompt} aria-hidden="true">
-          <span className={s.pr}>$</span> liraz <span className={s.fl}>--projects</span>{" "}
-          <span className={s.fl}>--status=live</span> <span className={s.cursor} />
+          <span className={s.pr}>$</span>{" "}
+          <span className={s.cmd}>
+            <TypeText text="liraz --projects --status=live" />
+          </span>
+          <span className={s.cursor} />
         </div>
       </div>
     </header>

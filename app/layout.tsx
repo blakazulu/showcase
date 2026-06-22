@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import AuroraBackground from "@/components/AuroraBackground";
 
 const display = Archivo({ subsets: ["latin"], weight: ["600","700","800"], variable: "--font-display", display: "swap" });
 const body = Hanken_Grotesk({ subsets: ["latin"], weight: ["400","500","600","700"], variable: "--font-body", display: "swap" });
@@ -14,11 +15,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Liraz Amir — I ship real products",
-  description: "19 deployed apps across AI, developer tooling, browser extensions and learning platforms — designed, built and run end to end. Most of it live right now.",
+  description: "18 deployed apps across AI, developer tooling, browser extensions and learning platforms — designed, built and run end to end. Most of it live right now.",
   metadataBase: new URL("https://sbz-showcase.netlify.app"),
   openGraph: {
     title: "Liraz Amir — I ship real products",
-    description: "19 deployed apps across AI, dev tooling, extensions and learning platforms — built end to end, live in production.",
+    description: "18 deployed apps across AI, dev tooling, extensions and learning platforms — built end to end, live in production.",
     url: "https://sbz-showcase.netlify.app",
     type: "website",
   },
@@ -27,7 +28,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${body.variable} ${mono.variable}`}>{children}</body>
+      <body className={`${display.variable} ${body.variable} ${mono.variable}`}>
+        <AuroraBackground />
+        {children}
+      </body>
     </html>
   );
 }
