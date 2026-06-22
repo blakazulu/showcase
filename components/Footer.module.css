@@ -1,0 +1,30 @@
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 0 56px;
+  color: var(--ink-2);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+}
+
+.row a {
+  color: var(--accent);
+}
+
+.disc {
+  margin-top: 14px;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  font-family: var(--mono);
+  max-width: 680px;
+  line-height: 1.7;
+  letter-spacing: .02em;
+}

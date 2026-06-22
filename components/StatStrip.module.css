@@ -1,0 +1,19 @@
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .03em;
+  color: var(--ink-2);
+}
+
+.s b {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--ink);
+  letter-spacing: 0;
+  margin-right: 5px;
+}
