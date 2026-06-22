@@ -34,6 +34,16 @@ test.describe("home responsiveness", () => {
     await page.getByRole("button", { name: "All", exact: true }).click();
     await expect(page.locator("article")).toHaveCount(18);
   });
+
+  test("newest row starts open and rows behave as a single-open accordion", async ({ page }) => {
+    await page.goto("/");
+    // newest project is pre-expanded — exactly one open panel on load
+    await expect(page.locator("details[open]")).toHaveCount(1);
+    // open a currently-closed row; the accordion keeps exactly one open
+    const closedSummary = page.locator("article:not(:has(details[open])) summary").first();
+    await closedSummary.click();
+    await expect(page.locator("details[open]")).toHaveCount(1);
+  });
 });
 
 test("detail page renders and has no overflow", async ({ page }) => {
