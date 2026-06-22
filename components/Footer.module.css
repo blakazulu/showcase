@@ -1,6 +1,7 @@
 .footer {
   border-top: 1px solid var(--line);
-  padding: 28px 0 56px;
+  padding-top: 28px;
+  padding-bottom: max(56px, calc(56px + env(safe-area-inset-bottom)));
   color: var(--ink-2);
 }
 
