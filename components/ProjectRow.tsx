@@ -13,7 +13,7 @@ const STEPS: ReadonlyArray<readonly [string, string]> = [
   ["publishing to edge", "0.9s"],
 ];
 
-// status class + visible label. Mirrors ProjectCard's statusInfo.
+// status class + visible label (same status rule used on the detail page).
 function statusInfo(p: Project): [string, string] {
   if (p.vis === "Private") return ["private", "Private"];
   if (p.vis === "Fork") return ["fork", "Fork"];
