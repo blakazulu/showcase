@@ -7,8 +7,8 @@ import type { Project } from "./types";
 // uniqueness in tests, not to generate these.
 //
 // Copy model (truthful marketing — real features only, no invented claims):
-//   tagline = hook (punchy one-liner) · short = one-sentence pitch (cards) ·
-//   desc = long paragraph (detail pages + featured card).
+//   tagline = hook (punchy one-liner) · short = one-sentence pitch (row summaries) ·
+//   desc = long paragraph (detail pages + the expanded project row).
 export const PROJECTS: Project[] = [
   { name: "CYCLE", slug: "cycle", tagline: "Your cyberpunk HIIT command center", date: "2026-06-21",
     cats: ["Web App"], vis: "Public", icon: "⏱️",
