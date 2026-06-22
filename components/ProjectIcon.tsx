@@ -1,46 +1,48 @@
+"use client";
 import {
   Timer,
-  Home,
-  MessageCircle,
+  House,
+  ChatCircleDots,
   Calculator,
   Siren,
   GraduationCap,
   Palette,
-  Box,
-  FlaskConical,
+  Cube,
+  Flask,
   Stethoscope,
   Keyboard,
-  Plane,
-  ImagePlus,
-  ShieldBan,
-  Landmark,
-  Sun,
-  Search,
-  FileText,
-  type LucideIcon,
-} from "lucide-react";
+  AirplaneTilt,
+  ImageSquare,
+  ShieldSlash,
+  Bank,
+  Cactus,
+  MagnifyingGlass,
+  FilePdf,
+  type Icon,
+} from "@phosphor-icons/react";
 
-/* Curated Lucide (MIT) icon per project — replaces emoji glyphs with crisp,
-   consistent SVGs that inherit the category color via currentColor. */
-const ICONS: Record<string, LucideIcon> = {
+/* Curated Phosphor (MIT) icon per project, rendered in the duotone weight so
+   each glyph reads as a two-tone mark in the category color (the secondary
+   layer is currentColor at reduced opacity). */
+const ICONS: Record<string, Icon> = {
   cycle: Timer,
-  "new-home-owner": Home,
-  chathop: MessageCircle,
+  "new-home-owner": House,
+  chathop: ChatCircleDots,
   "math-practice": Calculator,
   "az-ma-kore": Siren,
   "lumi-kid": GraduationCap,
   "past-palette": Palette,
-  "save-the-past": Box,
-  "stem-explorers": FlaskConical,
+  "save-the-past": Cube,
+  "stem-explorers": Flask,
   archeotriage: Stethoscope,
   keyquest: Keyboard,
-  floatjet: Plane,
-  "ai-image-generator": ImagePlus,
-  "hotjar-blocker": ShieldBan,
-  mortgagefix: Landmark,
-  "kiryat-begin-desert-science": Sun,
-  "search-mcp": Search,
-  scalpelpdf: FileText,
+  floatjet: AirplaneTilt,
+  "ai-image-generator": ImageSquare,
+  "hotjar-blocker": ShieldSlash,
+  mortgagefix: Bank,
+  "kiryat-begin-desert-science": Cactus,
+  "search-mcp": MagnifyingGlass,
+  scalpelpdf: FilePdf,
 };
 
 export default function ProjectIcon({
@@ -52,6 +54,6 @@ export default function ProjectIcon({
   size?: number;
   className?: string;
 }) {
-  const Icon = ICONS[slug] ?? Box;
-  return <Icon size={size} strokeWidth={1.75} className={className} aria-hidden="true" />;
+  const Glyph = ICONS[slug] ?? Cube;
+  return <Glyph size={size} weight="duotone" className={className} aria-hidden="true" />;
 }
