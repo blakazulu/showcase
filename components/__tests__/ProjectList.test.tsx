@@ -19,21 +19,20 @@ describe("ProjectList", () => {
     expect(within(list).getAllByRole("article")).toHaveLength(3);
   });
 
-  it("pre-expands the project with the most recent date", () => {
+  it("opens the first project in the list, whatever its date", () => {
     const { container } = render(<ProjectList projects={projects} />);
     const openDetails = container.querySelectorAll("details[open]");
     expect(openDetails).toHaveLength(1);
-    // the open row is the 'newest' article
-    expect(openDetails[0].closest("article")).toContainElement(screen.getByText("newest"));
+    // 'old' is first in the input (and the oldest) — it opens because it's first,
+    // not because of its date.
+    expect(openDetails[0].closest("article")).toContainElement(screen.getByText("old"));
   });
 
-  it("pins the newest project to the top, preserving the rest of the order", () => {
+  it("preserves the incoming order (no reordering)", () => {
     const { container } = render(<ProjectList projects={projects} />);
     const articles = container.querySelectorAll("article");
-    // newest is first even though it arrived in the middle of the input
-    expect(articles[0]).toContainElement(screen.getByText("newest"));
-    // the remaining rows keep their incoming relative order (old before mid)
-    expect(articles[1]).toContainElement(screen.getByText("old"));
+    expect(articles[0]).toContainElement(screen.getByText("old"));
+    expect(articles[1]).toContainElement(screen.getByText("newest"));
     expect(articles[2]).toContainElement(screen.getByText("mid"));
   });
 });
