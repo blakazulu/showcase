@@ -7,7 +7,7 @@ function statusInfo(p: Project): [string, string] {
   if (p.vis === "Private") return ["private", "Private"];
   if (p.vis === "Fork") return ["fork", "Fork"];
   if (p.vis === "Standalone") return ["norepo", "No repo"];
-  return ["live", p.live ? "Live" : "Public"];
+  return p.live ? ["live", "Live"] : ["public", "Public"];
 }
 
 export default function ProjectCard({ project: p }: { project: Project }) {

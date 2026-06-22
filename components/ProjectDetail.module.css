@@ -53,6 +53,7 @@
 }
 
 .live   { color: var(--live); }
+.public { color: var(--ink-3); }
 .private { color: var(--private); }
 .fork   { color: var(--fork); }
 .norepo { color: var(--fork); }

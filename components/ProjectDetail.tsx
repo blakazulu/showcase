@@ -25,7 +25,7 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
       ? s.norepo
       : p.live
       ? s.live
-      : s.live;
+      : s.public;
 
   return (
     <article
