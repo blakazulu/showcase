@@ -1,0 +1,84 @@
+/* ATS-safe one-column CV print stylesheet.
+   Neutral font, near-black on white, restrained accent, generous whitespace.
+   Works for LTR (English) and RTL (Hebrew) via <html dir="...">. */
+
+@page {
+  size: A4;
+  margin: 14mm 16mm;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-family: "Calibri", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.35;
+  color: #1a1a1a;
+}
+
+body {
+  margin: 0;
+  max-width: 100%;
+}
+
+/* single column, linear reading order */
+.cv { display: block; }
+
+/* --- header block --- */
+.name {
+  font-size: 21pt;
+  font-weight: 700;
+  margin: 0 0 1pt;
+  letter-spacing: 0.2px;
+}
+.title {
+  font-size: 12.5pt;
+  color: #444;
+  margin: 0 0 5pt;
+}
+.contact, .links {
+  font-size: 9.5pt;
+  color: #444;
+  margin: 0 0 2pt;
+}
+.links { margin-bottom: 8pt; }
+.links a { color: #2340a0; text-decoration: none; }
+
+/* URLs stay left-to-right even inside a Hebrew (RTL) document */
+.links { direction: ltr; unicode-bidi: isolate; }
+html[dir="rtl"] .links { text-align: right; }
+
+/* --- sections --- */
+.section { margin-top: 9pt; }
+.section-heading {
+  font-size: 11pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-bottom: 0.6pt solid #999;
+  padding-bottom: 2pt;
+  margin: 0 0 4pt;
+}
+
+.entry { margin: 4pt 0 1pt; }
+.entry-head { font-size: 10.5pt; }
+.entry-head .primary { font-weight: 700; }
+.entry-head .rest { color: #444; }
+
+ul.bullets {
+  margin: 1pt 0 4pt;
+  padding-inline-start: 16pt; /* logical - flips for RTL automatically */
+  list-style: disc;
+}
+ul.bullets li { margin: 0 0 1.5pt; }
+
+p.para { margin: 2pt 0; }
+
+/* keep an entry and its first line together across page breaks */
+.entry, .section-heading { break-inside: avoid; }
+.section-heading { break-after: avoid; }
+
+/* print fidelity */
+@media print {
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

@@ -1,5 +1,14 @@
-# Claude Code local tooling / installed skills
-.claude/
+# Claude Code local tooling (settings, plugins, caches) stays local...
+.claude/*
+# ...but the skills folder is tracked
+!.claude/skills/
+
+# Personal CV outputs (contact details) - never push to the auto-deploying repo
+cv/
+
+# Python bytecode cache (from the cv-builder skill scripts)
+__pycache__/
+*.pyc
 
 # Next.js / Node
 node_modules/
