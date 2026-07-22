@@ -10,6 +10,18 @@ import type { Project } from "./types";
 //   tagline = hook (punchy one-liner) · short = one-sentence pitch (row summaries) ·
 //   desc = long paragraph (detail pages + the expanded project row).
 export const PROJECTS: Project[] = [
+  { name: "Merge a Mutant", slug: "merge-a-mutant", tagline: "Merge alien specimens, raid labs with a friend", date: "2026-07-05",
+    cats: ["Game"], vis: "Private", icon: "🧬",
+    short: "A Roblox merge-and-tycoon game with a deep fusion system and 2-player co-op heists on other players' labs.",
+    desc: "Merge a Mutant takes the Roblox merge-and-tycoon genre further with two mechanics the format usually lacks: a deep fusion system and genuine 2-player co-op. Collect lab-grown alien specimens and fuse any two into something rarer and weirder — 41 named species plus a generated model for every one of the 903 fusion pairs — with first-ever discoveries announced server-wide. Your specimens idle on pods earning cash that funds gacha spins, more pods and defenses. The signature loop is the heist: you and exactly one partner run a ~90-second, four-phase raid on another player's lab, one grabbing while the other jams the defender's towers — and the defender fights back in real time with Overcharge. A tower-defense layer built from your own creatures turns every raid into an asymmetric run through a gauntlet the defender designed. Built in strict, server-authoritative Luau with six rarity tiers, a pity-based gacha and a fully data-driven content pipeline.",
+    tech: ["Luau", "Roblox", "Rojo", "ProfileStore", "Jest-Lua"] },
+
+  { name: "Prism", slug: "prism", tagline: "Turn a side screen into a live hardware cockpit", date: "2026-07-03",
+    cats: ["Dev Tool"], vis: "Private", icon: "🖥️",
+    short: "A GPU-rendered theme engine that turns a secondary display into a file-themeable hardware monitor, with desktop widgets and a fullscreen game launcher.",
+    desc: "Prism turns a secondary display into a live hardware cockpit. Built natively on Avalonia (.NET 10) and SkiaSharp, it fills a side screen — primarily the Lian Li 8.8\" 1920x480 panel — with a GPU-rendered, file-themeable hardware monitor, then adds always-available desktop widgets and a fullscreen game launcher. Themes are pure JSON data — images, SVG, Lottie, sensor-bound gauges and bars, plus procedural effects like matrix rain and embers — shipping with Molten, Circuit and CRT looks. It reads every sensor itself through LibreHardwareMonitor and measures in-game FPS via Windows ETW frame tracing, so no HWiNFO or RTSS is needed. Clock, Weather (Open-Meteo, no API key) and Recycle Bin widgets live in transparent, draggable windows, and a GameHub launcher opens on demand. Windows only.",
+    tech: ["C#", ".NET 10", "Avalonia", "SkiaSharp", "LibreHardwareMonitor"] },
+
   { name: "CYCLE", slug: "cycle", tagline: "Your cyberpunk HIIT command center", date: "2026-06-21",
     cats: ["Web App"], vis: "Public", icon: "⏱️",
     short: "An installable, offline-first interval timer with built-in plans and its own music engine.",

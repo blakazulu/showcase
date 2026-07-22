@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Next.js 15 App Router portfolio — Liraz Amir's 18 shipped projects as a filterable, static-exported site deployed to Netlify (`sbz-showcase.netlify.app`) on every push to `main`. The design is **"Aurora hero → console-styled terminal log"**: a bold gradient hero ("I ship real products.") over a flowing aurora (CSS gradient base + an optional Three.js shader accent), bridging into a terminal-window "deploy log" — KPI chips, a prompt line that reflects the active filter, category chips, and an expandable terminal-row list of projects. Stack: React 19, TypeScript strict, Three.js + `@react-three/fiber` + `@react-three/drei` (shader accent only — *not* the centerpiece), CSS Modules + design tokens, static export (`output: 'export'`). Theme is dark. Read `docs/GOALS.md` first; it holds the mission, scope, and honesty constraints. `docs/git_netlify_projects.csv` is the raw project inventory.
+Next.js 15 App Router portfolio — Liraz Amir's 20 shipped projects as a filterable, static-exported site deployed to Netlify (`sbz-showcase.netlify.app`) on every push to `main`. The design is **"Aurora hero → console-styled terminal log"**: a bold gradient hero ("I ship real products.") over a flowing aurora (CSS gradient base + an optional Three.js shader accent), bridging into a terminal-window "deploy log" — KPI chips, a prompt line that reflects the active filter, category chips, and an expandable terminal-row list of projects. Stack: React 19, TypeScript strict, Three.js + `@react-three/fiber` + `@react-three/drei` (shader accent only — *not* the centerpiece), CSS Modules + design tokens, static export (`output: 'export'`). Theme is dark. Read `docs/GOALS.md` first; it holds the mission, scope, and honesty constraints. `docs/git_netlify_projects.csv` is the raw project inventory.
 
 ## Commands
 
@@ -21,7 +21,7 @@ Configs: `next.config.mjs` (`output: 'export'`, `images.unoptimized`), `vitest.c
 ### `lib/` — single source of truth
 
 - `types.ts` — `Project`, `Visibility`, `Category` types
-- `projects.ts` — the 18 projects array (the only place project data lives)
+- `projects.ts` — the 20 projects array (the only place project data lives)
 - `helpers.ts` — `COLORS`, `LANE_ORDER`, `PRIORITY`, `primaryCat`, `fmtDate`, `slug`, `sortByDateDesc`, `getStats`. `COLORS` are brightened to glow on the dark surface and are the single source of category color (tile `--cat` accent, chips).
 
 ### Components (`components/`)
@@ -57,7 +57,7 @@ Fully mobile-first. `viewport-fit=cover` + `env(safe-area-inset-*)` via `max()` 
 
 ## Deploy safety
 
-Push to `main` auto-deploys to production — **only push with explicit user approval**. `netlify.toml` at repo root tells Netlify to run `npm run build` and publish `out/`.
+Pushing to GitHub `main` auto-deploys to Netlify at https://sbz-showcase.netlify.app — there is no separate deploy step. **Only push with explicit user approval**. `netlify.toml` at repo root tells Netlify to run `npm run build` and publish `out/`.
 
 ## Content rule (non-negotiable)
 

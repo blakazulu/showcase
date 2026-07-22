@@ -5,9 +5,10 @@ import type { Project, Category } from "./types";
 export const COLORS: Record<Category, string> = {
   "AI": "#9d7bff", "Education": "#ffb454", "Web App": "#5b8cff",
   "Dev Tool": "#2dd4cf", "Extension": "#ff7a59", "Content": "#8aa6d8",
+  "Game": "#ff6ac1",
 };
-export const LANE_ORDER: Category[] = ["AI", "Education", "Web App", "Dev Tool", "Extension", "Content"];
-export const PRIORITY: Category[] = ["Extension", "Dev Tool", "Content", "Education", "AI", "Web App"];
+export const LANE_ORDER: Category[] = ["AI", "Education", "Web App", "Dev Tool", "Extension", "Game", "Content"];
+export const PRIORITY: Category[] = ["Game", "Extension", "Dev Tool", "Content", "Education", "AI", "Web App"];
 
 export function primaryCat(p: Project): Category {
   return PRIORITY.find((c) => p.cats.includes(c)) ?? p.cats[0];

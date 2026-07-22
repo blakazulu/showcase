@@ -18,6 +18,8 @@ import {
   Cactus,
   MagnifyingGlass,
   FilePdf,
+  GameController,
+  Gauge,
   type Icon,
 } from "@phosphor-icons/react";
 
@@ -43,6 +45,8 @@ const ICONS: Record<string, Icon> = {
   "kiryat-begin-desert-science": Cactus,
   "search-mcp": MagnifyingGlass,
   scalpelpdf: FilePdf,
+  "merge-a-mutant": GameController,
+  prism: Gauge,
 };
 
 export default function ProjectIcon({

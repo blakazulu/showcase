@@ -1,5 +1,5 @@
 export type Visibility = "Public" | "Private" | "Fork" | "Standalone";
-export type Category = "Web App" | "AI" | "Dev Tool" | "Education" | "Extension" | "Content";
+export type Category = "Web App" | "AI" | "Dev Tool" | "Education" | "Extension" | "Content" | "Game";
 
 export interface Project {
   name: string;

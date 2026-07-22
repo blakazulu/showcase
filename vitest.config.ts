@@ -12,6 +12,6 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
     include: ["**/__tests__/**/*.{test,spec}.{ts,tsx}", "lib/__tests__/**/*.{test,spec}.{ts,tsx}"],
-    exclude: ["e2e/**", "node_modules/**", "out/**"],
+    exclude: ["e2e/**", "node_modules/**", "out/**", "lottie-player/**"],
   },
 });

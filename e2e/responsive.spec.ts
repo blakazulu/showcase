@@ -16,9 +16,9 @@ test.describe("home responsiveness", () => {
     ).toBeVisible();
   });
 
-  test("renders all 18 cards in the log", async ({ page }) => {
+  test("renders all 20 cards in the log", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("article")).toHaveCount(18);
+    await expect(page.locator("article")).toHaveCount(20);
   });
 
   test("category filter narrows the grid", async ({ page }) => {
@@ -27,12 +27,12 @@ test.describe("home responsiveness", () => {
     await expect(page.locator("article")).toHaveCount(1);
   });
 
-  test("clearing a filter restores all 18 cards", async ({ page }) => {
+  test("clearing a filter restores all 20 cards", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("button", { name: "Education", exact: true }).click();
-    await expect(page.locator("article")).not.toHaveCount(18);
+    await expect(page.locator("article")).not.toHaveCount(20);
     await page.getByRole("button", { name: "All", exact: true }).click();
-    await expect(page.locator("article")).toHaveCount(18);
+    await expect(page.locator("article")).toHaveCount(20);
   });
 
   test("first row starts open and rows behave as a single-open accordion", async ({ page }) => {
