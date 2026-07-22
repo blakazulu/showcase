@@ -32,6 +32,14 @@ exotic/zero-width spaces -> normal or removed). The DOCX self-test then scans th
 result and prints `OK: no AI-tell punctuation` or a warning listing any survivors.
 So even a stray smart quote pasted into a source file cannot reach the final DOCX/PDF.
 
+## Content preferences (Liraz - always apply)
+
+- **Never mention the "Az Ma Kore" project** on any CV or cover letter. Do not use it
+  as a project entry or example, in any language.
+- **MyPart AngularJS bullet:** phrase the migration as "Migrated production systems from
+  AngularJS to the latest Angular versions" (Hebrew: "לגרסאות Angular העדכניות"). Do not
+  pin a specific major version number.
+
 ## When to use
 
 Trigger on: "review my work / projects for the CV", "review my CV", "build /
