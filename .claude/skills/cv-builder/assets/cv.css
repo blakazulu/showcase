@@ -1,84 +1,47 @@
-/* ATS-safe one-column CV print stylesheet.
-   Neutral font, near-black on white, restrained accent, generous whitespace.
+/* ATS-safe one-column CV print stylesheet - "Minimal Modern".
+   Inter (Latin) / Heebo (Hebrew) from Google Fonts, near-black ink, one teal
+   accent: a bar before each section heading, bullet dots, links and result pills.
+   Single column, linear reading order, real selectable text.
    Works for LTR (English) and RTL (Hebrew) via <html dir="...">. */
 
-@page {
-  size: A4;
-  margin: 14mm 16mm;
-}
-
+@page { size: A4; margin: 13mm 15mm; }
 * { box-sizing: border-box; }
-
-html {
-  font-family: "Calibri", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  font-size: 10.5pt;
-  line-height: 1.35;
-  color: #1a1a1a;
-}
-
-body {
-  margin: 0;
-  max-width: 100%;
-}
-
-/* single column, linear reading order */
-.cv { display: block; }
-
-/* --- header block --- */
-.name {
-  font-size: 21pt;
-  font-weight: 700;
-  margin: 0 0 1pt;
-  letter-spacing: 0.2px;
-}
-.title {
-  font-size: 12.5pt;
-  color: #444;
-  margin: 0 0 5pt;
-}
-.contact, .links {
-  font-size: 9.5pt;
-  color: #444;
-  margin: 0 0 2pt;
-}
-.links { margin-bottom: 8pt; }
-.links a { color: #2340a0; text-decoration: none; }
-
-/* URLs stay left-to-right even inside a Hebrew (RTL) document */
+html, body { margin: 0; background: #fff; }
+h1, h2 { margin: 0; font-weight: inherit; }
+.row { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
+.date, .meta { white-space: nowrap; flex-shrink: 0; }
 .links { direction: ltr; unicode-bidi: isolate; }
 html[dir="rtl"] .links { text-align: right; }
-
-/* --- sections --- */
-.section { margin-top: 9pt; }
-.section-heading {
-  font-size: 11pt;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  border-bottom: 0.6pt solid #999;
-  padding-bottom: 2pt;
-  margin: 0 0 4pt;
-}
-
-.entry { margin: 4pt 0 1pt; }
-.entry-head { font-size: 10.5pt; }
-.entry-head .primary { font-weight: 700; }
-.entry-head .rest { color: #444; }
-
-ul.bullets {
-  margin: 1pt 0 4pt;
-  padding-inline-start: 16pt; /* logical - flips for RTL automatically */
-  list-style: disc;
-}
-ul.bullets li { margin: 0 0 1.5pt; }
-
-p.para { margin: 2pt 0; }
-
-/* keep an entry and its first line together across page breaks */
-.entry, .section-heading { break-inside: avoid; }
+.links a { text-decoration: none; }
+ul.bullets { margin: 2pt 0 3pt; padding-inline-start: 13pt; }
+ul.bullets li { margin: 0 0 2pt; padding-inline-start: 2pt; }
+p.para { margin: 0 0 2pt; }
+.entry, .section-heading, li { break-inside: avoid; }
 .section-heading { break-after: avoid; }
-
-/* print fidelity */
-@media print {
-  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-}
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --ink:#111827; --muted:#6b7280; --accent:#0f766e; --rule:#e5e7eb; }
+html { font-family: "Inter","Heebo","Segoe UI",Arial,sans-serif; font-size: 9.3pt; line-height: 1.45; color: var(--ink); }
+html[dir="rtl"] { font-family: "Heebo","Inter","Segoe UI",Arial,sans-serif; font-size: 9.8pt; }
+.head { margin-bottom: 2pt; }
+.name { font-size: 28pt; font-weight: 700; letter-spacing: -0.8pt; line-height: 1; }
+html[dir="rtl"] .name { letter-spacing: 0; }
+.title { font-size: 11.5pt; font-weight: 500; color: var(--muted); margin: 4pt 0 6pt; }
+.contact, .links { font-size: 8.6pt; color: var(--ink); }
+.links a { color: var(--accent); }
+.dot { color: #d1d5db; }
+.section { margin-top: 11pt; }
+.section-heading { display: flex; align-items: center; gap: 6pt; font-size: 10.5pt; font-weight: 700; color: var(--ink); margin-bottom: 4pt; }
+.section-heading::before { content: ""; width: 3pt; height: 11pt; background: var(--accent); border-radius: 1pt; }
+.section-heading::after { content: ""; flex: 1; height: 0.6pt; background: var(--rule); }
+.entry { margin: 6pt 0 1pt; }
+.primary { font-weight: 600; font-size: 10.2pt; }
+.role { color: var(--muted); font-weight: 500; }
+.sep { color: #d1d5db; }
+.date { font-size: 8.6pt; font-weight: 500; color: var(--muted); }
+.meta { font-size: 8.4pt; font-weight: 600; color: var(--accent); background: #ecfdf5; padding: 0.5pt 5pt; border-radius: 8pt; }
+.tech { font-size: 8.2pt; color: var(--muted); direction: ltr; unicode-bidi: isolate; }
+html[dir="rtl"] .tech { text-align: right; }
+ul.bullets { list-style: none; padding-inline-start: 10pt; }
+ul.bullets li { position: relative; }
+ul.bullets li::before { content: ""; position: absolute; inset-inline-start: -9pt; top: 5.5pt; width: 3.5pt; height: 3.5pt; border-radius: 50%; background: var(--accent); }
+.skill .label { font-weight: 600; }

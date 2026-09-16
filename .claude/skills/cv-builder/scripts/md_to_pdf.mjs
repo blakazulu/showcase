@@ -108,56 +108,90 @@ const esc = (s) =>
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
+// Section-aware rendering: Experience/Education entries put a trailing date
+// field right-aligned; Projects entries are "name | tech | result" with the
+// result as an accent pill and the tech stack on its own muted line; Skills
+// paragraphs of the form "Label: items" get a bold label.
+const FONTS_URL =
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Heebo:wght@400;500;600;700&display=swap";
+const isDate = (f) => /\d{4}/.test(f) && f.length < 20;
+const DOT = '<span class="dot"> | </span>';
+
+function renderSection(section) {
+  const projects = /Projects|פרויקטים/.test(section.heading);
+  const skills = /Skills|מיומנויות/.test(section.heading);
+  let h = "";
+  let open = false;
+  const close = () => {
+    if (open) {
+      h += "</ul>";
+      open = false;
+    }
+  };
+  for (const b of section.blocks) {
+    if (b.type === "entry") {
+      close();
+      const f = [...b.fields];
+      if (projects) {
+        const [name, tech, result] = f;
+        h += `<div class="entry proj"><div class="row"><span class="primary">${esc(name)}</span>${
+          result ? `<span class="meta">${esc(result)}</span>` : ""
+        }</div>${tech ? `<div class="tech">${esc(tech)}</div>` : ""}</div>`;
+      } else {
+        const date = f.length > 1 && isDate(f[f.length - 1]) ? f.pop() : "";
+        const [first, ...rest] = f;
+        const restHtml = rest.length
+          ? `<span class="sep"> | </span><span class="role">${rest.map(esc).join(" | ")}</span>`
+          : "";
+        h += `<div class="entry"><div class="row"><span><span class="primary">${esc(first)}</span>${restHtml}</span>${
+          date ? `<span class="date">${esc(date)}</span>` : ""
+        }</div></div>`;
+      }
+    } else if (b.type === "bullet") {
+      if (!open) {
+        h += '<ul class="bullets">';
+        open = true;
+      }
+      h += `<li>${esc(b.text)}</li>`;
+    } else if (b.type === "para") {
+      close();
+      const c = b.text.indexOf(":");
+      if (skills && c > 0 && c < 40) {
+        // <bdi> isolates an English label ("Front-End") inside a Hebrew line so its colon stays put
+        h += `<p class="para skill"><span class="label"><bdi>${esc(b.text.slice(0, c))}</bdi>:</span> ${esc(b.text.slice(c + 1).trim())}</p>`;
+      } else {
+        h += `<p class="para">${esc(b.text)}</p>`;
+      }
+    }
+  }
+  close();
+  const head = section.heading ? `<h2 class="section-heading">${esc(section.heading)}</h2>` : "";
+  return `<section class="section">${head}${h}</section>`;
+}
+
 function renderHtml(cv, css) {
   const { front, links, sections, dir } = cv;
-  const contact = [front.location, front.phone, front.email].filter(Boolean).map(esc).join("  |  ");
+  // <bdi> keeps each bit (e.g. "+972-...") in its own direction inside a Hebrew line
+  const contact = [front.location, front.phone, front.email].filter(Boolean).map((b) => `<bdi>${esc(b)}</bdi>`).join(DOT);
   const linkHtml = links
-    .map(([lbl, url]) => `<a href="${esc(url)}">${esc(lbl)}: ${esc(url)}</a>`)
-    .join("  |  ");
-
-  const sectionHtml = sections
-    .map((section) => {
-      const blocks = [];
-      let bulletOpen = false;
-      const closeBullets = () => {
-        if (bulletOpen) {
-          blocks.push("</ul>");
-          bulletOpen = false;
-        }
-      };
-      for (const b of section.blocks) {
-        if (b.type === "entry") {
-          closeBullets();
-          const [first, ...rest] = b.fields;
-          const restHtml = rest.length ? ` <span class="rest">${SEP.trim()} ${rest.map(esc).join("  |  ")}</span>` : "";
-          blocks.push(`<div class="entry"><div class="entry-head"><span class="primary">${esc(first)}</span>${restHtml}</div></div>`);
-        } else if (b.type === "bullet") {
-          if (!bulletOpen) {
-            blocks.push('<ul class="bullets">');
-            bulletOpen = true;
-          }
-          blocks.push(`<li>${esc(b.text)}</li>`);
-        } else if (b.type === "para") {
-          closeBullets();
-          blocks.push(`<p class="para">${esc(b.text)}</p>`);
-        }
-      }
-      closeBullets();
-      const head = section.heading ? `<div class="section-heading">${esc(section.heading)}</div>` : "";
-      return `<div class="section">${head}${blocks.join("")}</div>`;
-    })
-    .join("");
+    .map(([, url]) => `<a href="${esc(url)}">${esc(url.replace(/^https?:\/\/(www\.)?/, ""))}</a>`)
+    .join(DOT);
 
   return `<!doctype html>
 <html dir="${dir}" lang="${esc(front.lang || (dir === "rtl" ? "he" : "en"))}">
-<head><meta charset="utf-8"><style>${css}</style></head>
-<body><div class="cv">
-  <div class="name">${esc(front.name || "")}</div>
-  ${front.title ? `<div class="title">${esc(front.title)}</div>` : ""}
-  ${contact ? `<div class="contact">${contact}</div>` : ""}
-  ${linkHtml ? `<div class="links">${linkHtml}</div>` : ""}
-  ${sectionHtml}
-</div></body></html>`;
+<head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="${FONTS_URL}" rel="stylesheet">
+<style>${css}</style></head>
+<body><main class="cv">
+  <header class="head">
+    <h1 class="name">${esc(front.name || "")}</h1>
+    ${front.title ? `<div class="title">${esc(front.title)}</div>` : ""}
+    ${contact ? `<div class="contact">${contact}</div>` : ""}
+    ${linkHtml ? `<div class="links">${linkHtml}</div>` : ""}
+  </header>
+  ${sections.map(renderSection).join("")}
+</main></body></html>`;
 }
 
 async function loadChromium() {
@@ -192,6 +226,7 @@ async function main() {
   try {
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle" });
+    await page.evaluate(() => document.fonts.ready);
     await page.pdf({
       path: resolve(out),
       format: "A4",

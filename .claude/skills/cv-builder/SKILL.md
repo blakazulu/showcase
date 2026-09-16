@@ -55,6 +55,14 @@ pip install python-docx
 ```
 
 The PDF generator reuses the repo's existing Playwright/Chromium - no new install.
+
+**Design ("Minimal Modern", chosen Sept 2026):** one column, Inter (English) / Heebo
+(Hebrew) loaded from Google Fonts, near-black ink with one teal accent (#0F766E): a bar
+before each section heading, dot bullets, links, and project results as pills. Dates
+sit right-aligned on the entry line; a project's tech stack gets its own small muted
+line. The style lives in `assets/cv.css`; the PDF exporter needs internet for the fonts
+(falls back to Segoe UI / Arial). The DOCX mirrors the layout with Calibri (Arial for
+Hebrew), since Word only uses fonts installed on the reader's machine.
 Run all commands from the repo root (`C:\Code\Personal\showcase`).
 
 ## Output location
