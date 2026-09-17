@@ -127,7 +127,7 @@ export const PROJECTS: Project[] = [
     short: "A Hebrew site for a mortgage guidance service that helps people compare options with confidence.",
     desc: `Mortgages are confusing by design — MortgageFix (“משכנתFix”) cuts through it. A Hebrew RTL site for a mortgage guidance and consultation service that helps people compare options and make decisions with confidence. Built and deployed from Bolt.`,
     tech: ["Bolt","Static","RTL"],
-    live: "https://gregarious-kashata-cbfd50.netlify.app" },
+    live: "https://mashcanta-fix.netlify.app" },
 
   { name: "Kiryat Begin — Desert Science", slug: "kiryat-begin-desert-science", tagline: "Science, straight from the desert", date: "2025-05-11",
     cats: ["Education","Web App"], vis: "Standalone", icon: "🏜️",
