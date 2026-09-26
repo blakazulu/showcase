@@ -3,11 +3,12 @@ import { PROJECTS } from "../projects";
 import { SLOTS, MODE_ORDER, modeProjects, slotItem, MODE_LABELS } from "../desk";
 
 describe("desk modes", () => {
-  it("partition all 20 projects exactly once", () => {
+  it("partition all 21 projects exactly once", () => {
     const all = MODE_ORDER.flatMap((m) => modeProjects(m).map((p) => p.slug));
     expect(all).toHaveLength(PROJECTS.length);
     expect(new Set(all).size).toBe(PROJECTS.length);
     expect([...all].sort()).toEqual(PROJECTS.map((p) => p.slug).sort());
+    expect(MODE_ORDER.map((m) => modeProjects(m).length)).toEqual([12, 3, 6]);
   });
 
   it("every mode is non-empty", () => {
@@ -38,7 +39,7 @@ describe("desk slots", () => {
     expect(f.name).toBe("Findra");
     expect(f.live).toBe("https://findra-search.netlify.app/");
     expect(f.github).toBe("https://github.com/blakazulu/findra");
-    expect(f.project).toBeUndefined(); // not counted among the 20
+    expect(f.project?.slug).toBe("findra"); // counted among the 21
   });
 
   it("contains no U+2022 bullet characters anywhere", () => {

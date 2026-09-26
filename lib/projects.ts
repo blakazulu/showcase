@@ -10,6 +10,13 @@ import type { Project } from "./types";
 //   tagline = hook (punchy one-liner) · short = one-sentence pitch (row summaries) ·
 //   desc = long paragraph (detail pages + the expanded project row).
 export const PROJECTS: Project[] = [
+  { name: "Findra", slug: "findra", tagline: "Windows search, but it works", date: "2026-09-25",
+    cats: ["Dev Tool"], vis: "Public", icon: "🔎",
+    short: "A free, open-source desktop search app for Windows 10/11 - filenames in milliseconds, plus documents, photos and recordings, all on your own machine.",
+    desc: "Lost the name but remember what was inside? Findra searches filenames in milliseconds and can also find documents by their text, photos by what's visible, and recordings by what's said. Content search is optional: enable and download only the models you want. It runs locally on Windows 10/11, with no account, cloud upload or telemetry. Free and open source under Apache 2.0. Version 0.4.3 is available from the project site; the 0.4.3 Microsoft Store submission is in certification review.",
+    tech: ["Windows", "NTFS", "Local AI", "Apache 2.0"],
+    live: "https://findra-search.netlify.app/", github: "https://github.com/blakazulu/findra" },
+
   { name: "Merge a Mutant", slug: "merge-a-mutant", tagline: "Merge alien specimens, raid labs with a friend", date: "2026-07-05",
     cats: ["Game"], vis: "Private", icon: "🧬",
     short: "A Roblox merge-and-tycoon game with a deep fusion system and 2-player co-op heists on other players' labs.",

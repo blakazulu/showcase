@@ -16,9 +16,9 @@ test.describe("home responsiveness", () => {
     ).toBeVisible();
   });
 
-  test("renders all 20 cards in the log", async ({ page }) => {
+  test("renders all 21 cards in the log", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("article")).toHaveCount(20);
+    await expect(page.locator("article")).toHaveCount(21);
   });
 
   test("category filter narrows the grid", async ({ page }) => {
@@ -27,12 +27,12 @@ test.describe("home responsiveness", () => {
     await expect(page.locator("article")).toHaveCount(1);
   });
 
-  test("clearing a filter restores all 20 cards", async ({ page }) => {
+  test("clearing a filter restores all 21 cards", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("button", { name: "Education", exact: true }).click();
-    await expect(page.locator("article")).not.toHaveCount(20);
+    await expect(page.locator("article")).not.toHaveCount(21);
     await page.getByRole("button", { name: "All", exact: true }).click();
-    await expect(page.locator("article")).toHaveCount(20);
+    await expect(page.locator("article")).toHaveCount(21);
   });
 
   test("first row starts open and rows behave as a single-open accordion", async ({ page }) => {
@@ -53,4 +53,18 @@ test("detail page renders and has no overflow", async ({ page }) => {
     document.documentElement.scrollWidth - document.documentElement.clientWidth
   );
   expect(overflow).toBeLessThanOrEqual(1);
+});
+
+test("Findra detail page and desk monitor link", async ({ page }) => {
+  await page.goto("/projects/findra/");
+  await expect(page.getByRole("heading", { name: "Findra" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /visit live/i })).toHaveAttribute("href", "https://findra-search.netlify.app/");
+  await page.goto("/");
+  if (page.viewportSize()!.width >= 768) {
+    await page.getByRole("button", { name: /monitor/i }).click();
+    await expect(page.getByRole("link", { name: /full story/i })).toHaveAttribute("href", "/projects/findra/");
+  } else {
+    await page.getByRole("group", { name: "Desk mode" }).getByRole("button", { name: "Dev tools" }).click();
+    await expect(page.getByRole("link", { name: "Findra", exact: true })).toHaveAttribute("href", "/projects/findra/");
+  }
 });

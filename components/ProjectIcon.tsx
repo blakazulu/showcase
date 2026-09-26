@@ -27,6 +27,7 @@ import {
    each glyph reads as a two-tone mark in the category color (the secondary
    layer is currentColor at reduced opacity). */
 const ICONS: Record<string, Icon> = {
+  findra: MagnifyingGlass,
   cycle: Timer,
   "new-home-owner": House,
   chathop: ChatCircleDots,
