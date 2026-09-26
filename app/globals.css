@@ -9,6 +9,8 @@
   /* domain palette — brightened to glow on the dark field, encodes range */
   --c-ai:#9d7bff; --c-edu:#ffb454; --c-web:#5b8cff;
   --c-dev:#2dd4cf; --c-ext:#ff7a59; --c-content:#8aa6d8;
+  /* desk scene — warm lamplight palette */
+  --desk-warm:#ffb37a; --desk-lamp:#ffd9a0; --desk-wood:#8a5a33;
   --r:10px; --r-sm:6px; --maxw:1200px; --lane:26px;
   --display: var(--font-display), -apple-system, system-ui, sans-serif;
   --body: var(--font-body), -apple-system, system-ui, sans-serif;
