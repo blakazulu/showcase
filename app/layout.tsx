@@ -1,3 +1,4 @@
+import Script from "next/script";
 import type { Metadata, Viewport } from "next";
 import { Archivo, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
@@ -28,7 +29,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head><link rel="stylesheet" href="/shayach-layout.css" /></head>
       <body className={`${display.variable} ${body.variable} ${mono.variable}`}>
+        <Script src="/shayach-config.js" strategy="beforeInteractive" />
+        <Script src="https://shayach.co.il/v1/widget.js" strategy="afterInteractive" />
         <AuroraBackground />
         {children}
       </body>
