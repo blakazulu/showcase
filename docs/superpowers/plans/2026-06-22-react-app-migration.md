@@ -15,7 +15,7 @@
 - **No 3D / Three.js** in this phase.
 - **Design tokens are authoritative** — copy the `:root` values verbatim from `showcase.html`; do not invent new colors. No gradients/glow (flat color only).
 - **Honesty rule (from `docs/GOALS.md`):** descriptions are sourced from README/live site, never inflated. Detail pages expand only existing data; `highlights`/`screenshots` stay empty until real content exists. Status labels: `Private` = live but source-closed, `Fork`/`Standalone` labeled as such.
-- **Deploy safety:** every push to `main` auto-deploys to `sbz-showcase.netlify.app`. Do NOT `git push` until the final build gate passes AND the user approves. Local `git commit` per task is fine. Work happens on `main` (no feature branch — do not create branches without explicit user approval).
+- **Deploy safety:** every push to `main` auto-deploys to `showcase.esekpo.co.il`. Do NOT `git push` until the final build gate passes AND the user approves. Local `git commit` per task is fine. Work happens on `main` (no feature branch — do not create branches without explicit user approval).
 - All project content (the 19 entries) and all CSS are ported from the current `showcase.html`, which remains present until Task 11.
 - **Fully responsive:** every UI must work mobile-first across all resolutions (small phones → large desktops): no horizontal overflow/scroll, readable type, usable tap targets, sticky/edge UI never overlaps content.
 - **Safe areas:** the page must respect iOS/Android safe-area insets. Viewport set to `viewport-fit=cover` (Next: `export const viewport = { viewportFit: "cover" }`); fixed/sticky/edge elements (top bar, sticky filter bar, `.wrap`, footer) pad with `env(safe-area-inset-*)`.
@@ -184,11 +184,11 @@ const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400","500","600"], va
 export const metadata: Metadata = {
   title: "Liraz Amir — Deploy Log",
   description: "A builder who designs, ships, and runs software across AI apps, developer tooling, browser extensions, and learning platforms. Most of it live right now.",
-  metadataBase: new URL("https://sbz-showcase.netlify.app"),
+  metadataBase: new URL("https://showcase.esekpo.co.il"),
   openGraph: {
     title: "Liraz Amir — Deploy Log",
     description: "Built end to end. Shipped to production. AI apps, dev tools, extensions, and learning platforms.",
-    url: "https://sbz-showcase.netlify.app",
+    url: "https://showcase.esekpo.co.il",
     type: "website",
   },
 };

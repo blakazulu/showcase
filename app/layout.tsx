@@ -17,11 +17,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Liraz Amir — I ship real products",
   description: "18 deployed apps across AI, developer tooling, browser extensions and learning platforms — designed, built and run end to end. Most of it live right now.",
-  metadataBase: new URL("https://sbz-showcase.netlify.app"),
+  metadataBase: new URL("https://showcase.esekpo.co.il"),
   openGraph: {
     title: "Liraz Amir — I ship real products",
     description: "18 deployed apps across AI, dev tooling, extensions and learning platforms — built end to end, live in production.",
-    url: "https://sbz-showcase.netlify.app",
+    url: "https://showcase.esekpo.co.il",
     type: "website",
   },
 };

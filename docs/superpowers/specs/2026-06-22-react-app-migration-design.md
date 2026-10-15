@@ -18,7 +18,7 @@ routes visitors to live products. No 3D in this phase.
 | 3D / Three.js | **None this phase** (skills installed for later work) |
 | Routing | **Home + per-project detail pages** (`/projects/[slug]`) |
 | Styling | **CSS Modules + design tokens** (port existing CSS ~1:1) |
-| Deploy | **Netlify**, auto-deploy on push to `github.com/blakazulu/showcase` → `sbz-showcase.netlify.app` |
+| Deploy | **Netlify**, auto-deploy on push to `github.com/blakazulu/showcase` → `showcase.esekpo.co.il` |
 | Legacy file | **Delete `showcase.html`** (no `legacy/` folder) |
 
 ## Architecture
